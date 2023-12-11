@@ -5,7 +5,7 @@
 (require 'calendar)
 
 (defgroup giornata nil
-  "Foolishly simple diary system."
+  "Foolishly simple journaling."
   :prefix "giornata-")
 
 (defcustom giornata-directory "~/diary-giornata"
