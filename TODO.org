@@ -1,0 +1,6 @@
+#+TITLE: giornata
+#+FILETAGS: :giornata:oss:
+
+* TODO Try pandoc as an export backend :design:
+* TODO Try xapian as a search engine :design:
+* TODO Hack on consult to provide search functionality :emacs:
