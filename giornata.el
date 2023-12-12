@@ -22,9 +22,9 @@
       "title: %t, %y-%m-%d\n"
       "---\n\n")
      (list (cons ?t day-name)
-	   (cons ?y year)
-	   (cons ?m month)
-	   (cons ?d day)))))
+	   (cons ?y (format "%04d" year))
+	   (cons ?m (format "%02d" month))
+	   (cons ?d (format "%02d" day))))))
 
 (defun giornata--create-entry (year month day)
   "Create or open the entry corresponding to YEAR, MONTH and DAY."
