@@ -45,7 +45,9 @@
 	 (year  (decoded-time-year date))
 	 (month (decoded-time-month date))
 	 (day   (decoded-time-day date)))
-    (giornata--create-entry year month day)))
+    (giornata--create-entry year month day)
+    (unless (eq major-mode 'markdown-mode)
+      (markdown-mode))))
 
 ;;;###autoload
 (defun giornata-create-entry-from-calendar ()
