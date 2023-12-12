@@ -8,7 +8,7 @@
   "Foolishly simple journaling."
   :prefix "giornata-")
 
-(defcustom giornata-directory "~/diary"
+(defcustom giornata-directory nil
   "Directory containing your diary."
   :type 'directory
   :group 'giornata)
