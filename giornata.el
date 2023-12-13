@@ -25,6 +25,7 @@
   :type 'directory
   :group 'giornata)
 
+;; [2023-12-13] TODO: What kind of metadata helps in a journaling context?
 (defun giornata--template (year month day)
   "Return the template of diary entries."
   (when-let* ((day-name (calendar-day-name (list month day year))))
@@ -47,7 +48,7 @@
     (when (= (point-min) (point-max))
       (insert (giornata--template year month day)))
     (unless (eobp)
-      (end-of-buffer))))
+      (goto-char (point-max)))))
 
 ;;;###autoload
 (defun giornata-today ()
