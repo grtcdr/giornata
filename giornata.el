@@ -25,6 +25,10 @@
   :type 'directory
   :group 'giornata)
 
+(defconst giornata--file-regexp
+  (rx (= 2 digit))
+  "Return non-nil if filename is considered valid.")
+
 (defun giornata--template (year month day)
   "Return the template of diary entries."
   (when-let* ((day-name (calendar-day-name (list month day year))))
@@ -73,5 +77,34 @@
       (giornata--create-entry year month day)
     (user-error "Could not extract date from point")))
 
-(provide 'giornata)
+(defun giornata--directory-p (directory)
+  "Return non-nil if DIRECTORY is considered valid."
+  (let ((year-or-month (rx (or (= 4 digit) (= 2 digit)))))
+    (string-match-p year-or-month directory)))
 
+(defun giornata--entries ()
+  "Return a list of diary entries."
+  (directory-files-recursively
+   giornata-directory giornata--file-regexp
+   nil #'giornata--directory-p))
+
+(defun giornata--entries-as-dates ()
+  "Return diary entries as dates."
+  (mapcar
+   #'giornata--date-as-list
+   (mapcar
+    (lambda (filename)
+      (string-remove-prefix (concat giornata-directory "/") filename))
+    (giornata--entries))))
+
+(defun giornata--date-as-list (date)
+  "Transform a string-formatted DATE into a list.
+DATE must be a valid ISO 8601 date."
+  (when-let* ((date (string-replace "/" "-" date))
+	      (decoded-date (iso8601-parse-date date))
+	      (year (decoded-time-year decoded-date))
+	      (month (decoded-time-month decoded-date))
+	      (day (decoded-time-day decoded-date)))
+    (list year month day)))
+
+(provide 'giornata)
