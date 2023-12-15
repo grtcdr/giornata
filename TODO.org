@@ -1,7 +1,9 @@
 #+TITLE: To-dos
 #+FILETAGS: :giornata:oss:
+#+CATEGORY: giornata
 
 * TODO [#A] Integrate with the built-in calendar :emacs:
+- Work on this has begun at the =calendar= branch.
 * TODO [#A] Refactor construction of front matter :emacs:
 SCHEDULED: <2023-12-13 Wed>
 - It feels hacky and limited, front matter should be constructed in a more
