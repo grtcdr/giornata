@@ -69,13 +69,14 @@
 (defun giornata-create-entry-from-calendar ()
   "Create an entry in the diary for the date at point."
   (interactive)
-  ;; [2023-12-11] TODO: Can error handling be improved?
-  (if-let* ((date  (calendar-cursor-to-date))
-	    (year  (nth 2 date))
-	    (month (nth 0 date))
-	    (day   (nth 1 date)))
-      (giornata--create-entry year month day)
-    (user-error "Could not extract date from point")))
+  (condition-case nil
+      (let* ((date  (calendar-cursor-to-date))
+	     (year  (nth 2 date))
+	     (month (nth 0 date))
+	     (day   (nth 1 date)))
+	(giornata--create-entry year month day))
+    (void-variable
+     (user-error "Could not extract date from point"))))
 
 (defun giornata--directory-p (directory)
   "Return non-nil if DIRECTORY is considered valid."
