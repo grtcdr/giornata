@@ -39,9 +39,13 @@
 	   (cons ?m (format "%02d" month))
 	   (cons ?d (format "%02d" day))))))
 
-(defun giornata--create-entry (year month day)
-  "Create or open the entry corresponding to YEAR, MONTH and DAY."
-  (let* ((base  (expand-file-name (format "%04d/%02d" year month) giornata-directory))
+(defun giornata--create-entry (time)
+  "Create or open the entry corresponding to TIME."
+  (let* ((time  (decode-time time))
+	 (year  (decoded-time-year time))
+	 (month (decoded-time-month time))
+	 (day   (decoded-time-day time))
+	 (base  (expand-file-name (format "%04d/%02d" year month) giornata-directory))
 	 (entry (expand-file-name (format "%02d" day) base)))
     (make-directory base :parents)
     (find-file entry)
@@ -54,13 +58,9 @@
 (defun giornata-today ()
   "Create or open today's entry in the diary."
   (interactive)
-  (let* ((date  (decode-time))
-	 (year  (decoded-time-year date))
-	 (month (decoded-time-month date))
-	 (day   (decoded-time-day date)))
-    (giornata--create-entry year month day)
-    (unless (eq major-mode 'markdown-mode)
-      (markdown-mode))))
+  (giornata--create-entry (current-time))
+  (unless (eq major-mode 'markdown-mode)
+    (markdown-mode)))
 
 ;;;###autoload
 (defun giornata-create-entry-from-calendar ()
@@ -70,8 +70,9 @@
       (let* ((date  (calendar-cursor-to-date))
 	     (year  (nth 2 date))
 	     (month (nth 0 date))
-	     (day   (nth 1 date)))
-	(giornata--create-entry year month day))
+	     (day   (nth 1 date))
+	     (time  (encode-time (list 0 0 0 day month year))))
+	(giornata--create-entry time))
     (void-variable
      (user-error "Could not extract date from point"))))
 
