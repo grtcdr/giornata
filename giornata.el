@@ -18,7 +18,8 @@
 
 (defgroup giornata nil
   "Foolishly simple journaling."
-  :prefix "giornata-")
+  :prefix "giornata-"
+  :group 'convenience)
 
 (defcustom giornata-directory "~/diary"
   "Directory containing your diary."
