@@ -4,13 +4,14 @@
 
 * TODO [#A] Integrate with the built-in calendar :emacs:
 - Work on this has begun at the =calendar= branch.
-* TODO [#A] Refactor construction of front matter :emacs:
-SCHEDULED: <2023-12-13 Wed>
+* DONE [#A] Refactor construction of front matter :emacs:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2023-12-19 Tue 18:14]
+:END:
 - It feels hacky and limited, front matter should be constructed in a more
   elegant and extensible manner.
 - Consider using Denote as a reference.
 * TODO [#A] Hack on consult to provide search functionality :emacs:
-SCHEDULED: <2023-12-13 Wed>
 - Provide this functionality as an optional extension (~giornata-consult~)
 * TODO [#B] Try pandoc as an export backend :design:
 * TODO [#B] Try xapian as a search engine :design:

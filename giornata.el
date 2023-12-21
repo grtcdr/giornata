@@ -26,45 +26,56 @@
   :type 'directory
   :group 'giornata)
 
-;; [2023-12-13] TODO: What kind of metadata helps in a journaling context?
-(defun giornata--template (year month day)
-  "Return the template of diary entries."
-  (when-let* ((day-name (calendar-day-name (list month day year))))
-    (format-spec
-     (concat
-      "---\n"
-      "title: %t, %y-%m-%d\n"
-      "---\n\n")
-     (list (cons ?t day-name)
-	   (cons ?y (format "%04d" year))
-	   (cons ?m (format "%02d" month))
-	   (cons ?d (format "%02d" day))))))
+(defvar giornata-front-matter
+  (concat "---\n"
+	  "title: %a, %y-%m-%d\n"
+	  "---\n\n"))
 
-(defun giornata--create-entry (time)
-  "Create or open the entry corresponding to TIME."
-  (let* ((time  (decode-time time))
-	 (year  (decoded-time-year time))
-	 (month (decoded-time-month time))
-	 (day   (decoded-time-day time))
-	 (base  (expand-file-name (format "%04d/%02d" year month) giornata-directory))
-	 (entry (expand-file-name (format "%02d" day) base)))
-    (make-directory base :parents)
-    (find-file entry)
+(defun giornata-front-matter-spec (time)
+  "Return a specification alist for `giornata-front-matter'.
+TIME is a list such as the one returned by `decode-time'."
+  (let ((day   (decoded-time-day time))
+	(month (decoded-time-month time))
+	(year  (decoded-time-year time)))
+    (list (cons ?a (calendar-day-name (list month day year)))
+	  (cons ?y (format "%04d" year))
+	  (cons ?m (format "%02d" month))
+	  (cons ?d (format "%02d" day)))))
+
+(defun giornata--format-front-matter (time)
+  "Return the formatted front matter.
+TIME is a list such as the one returned by `decode-time'.
+Internally, this formats `giornata-front-matter' using
+`giornata-front-matter-spec'."
+  (format-spec giornata-front-matter
+	       (giornata-front-matter-spec time)))
+
+(defun giornata--create-entry (timestamp)
+  "Create or visit the entry corresponding to TIMESTAMP.
+TIMESTAMP is a time value."
+  (let* ((time      (decode-time timestamp))
+	 (year      (decoded-time-year time))
+	 (month     (decoded-time-month time))
+	 (day       (decoded-time-day time))
+	 (directory (expand-file-name (format "%04d/%02d" year month) giornata-directory))
+	 (filename  (expand-file-name (format "%02d" day) directory)))
+    (make-directory directory :parents)
+    (find-file filename)
     (when (= (point-min) (point-max))
-      (insert (giornata--template year month day)))
+      (insert (giornata--format-front-matter time)))
     (unless (eobp)
       (goto-char (point-max)))))
 
 ;;;###autoload
 (defun giornata-today ()
-  "Create or open today's entry in the diary."
+  "Create or visit today's entry in the diary."
   (interactive)
   (giornata--create-entry (current-time))
   (unless (eq major-mode 'markdown-mode)
     (markdown-mode)))
 
 ;;;###autoload
-(defun giornata-create-entry-from-calendar ()
+(defun giornata-from-calendar ()
   "Create an entry in the diary for the date at point."
   (interactive)
   (condition-case nil
@@ -73,9 +84,11 @@
 	     (month (nth 0 date))
 	     (day   (nth 1 date))
 	     (time  (encode-time (list 0 0 0 day month year))))
-	(giornata--create-entry time))
+	(giornata--create-entry time)
+	(unless (eq major-mode 'markdown-mode)
+	  (markdown-mode)))
     (void-variable
-     (user-error "Could not extract date from point"))))
+     (and (yes-or-no-p "See the calendar first?")
+	  (calendar)))))
 
 (provide 'giornata)
-
