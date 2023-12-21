@@ -31,7 +31,8 @@
 
 (defun giornata--entries (&optional year month)
   "Return a list of diary entries.
-YEAR and MONTH are optional integers which act as filters."
+YEAR and MONTH can act as filters, returning only those entries
+underneath them."
   (let ((fyear (and year (format "%04d" year)))
 	(fmonth (and month (format "%02d" month)))
 	(base-directory giornata-directory))
