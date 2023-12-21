@@ -1,21 +1,26 @@
-#+TITLE: To-dos
-#+FILETAGS: :giornata:oss:
-#+CATEGORY: giornata
+#+title: To-dos
+#+filetags: :giornata:oss:
+#+category: giornata
 
-* TODO Write some unit tests :emacs:
-* DONE Integrate with the built-in calendar :emacs:
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2023-12-21 Thu 14:08]
+* TODO Write some unit tests
+* TODO Hack on consult to provide search functionality
+- Provide this functionality as an optional extension (~giornata-consult~)
+* Archive :ARCHIVE:
+** DONE Refactor construction of front matter
+:PROPERTIES:
+:ARCHIVE_TIME: 2023-12-21 Thu 22:43
 :END:
-- Work on this has begun at the =calendar= branch.
-* DONE Refactor construction of front matter :emacs:
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2023-12-19 Tue 18:14]
 :END:
 - It feels hacky and limited, front matter should be constructed in a more
   elegant and extensible manner.
 - Consider using Denote as a reference.
-* TODO Hack on consult to provide search functionality :emacs:
-- Provide this functionality as an optional extension (~giornata-consult~)
-* TODO Try pandoc as an export backend :design:
-* TODO Try xapian as a search engine :design:
+** DONE Integrate with the built-in calendar
+:PROPERTIES:
+:ARCHIVE_TIME: 2023-12-21 Thu 22:43
+:END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2023-12-21 Thu 14:08]
+:END:
+- Work on this has begun at the =calendar= branch.
