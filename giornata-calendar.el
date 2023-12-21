@@ -51,7 +51,9 @@ underneath them."
      #'giornata--directory-p)))
 
 (defun giornata--entries-as-dates (&optional year month)
-  "Return diary entries as dates."
+  "Return diary entries as dates.
+YEAR and MONTH can act as filters, returning only those entries
+underneath them."
   (mapcar
    #'giornata--date-as-list
    (mapcar
@@ -60,7 +62,7 @@ underneath them."
     (funcall #'giornata--entries year month))))
 
 (defun giornata--date-as-list (date)
-  "Transform a string-formatted DATE into a list.
+  "Transform DATE string into a list.
 DATE must be a valid ISO 8601 date."
   (when-let* ((date (string-replace "/" "-" date))
 	      (decoded-date (iso8601-parse-date date))
