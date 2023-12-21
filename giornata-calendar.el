@@ -6,6 +6,10 @@
 (require 'calendar)
 (require 'iso8601)
 
+(defconst giornata--entry-regexp
+  (rx string-start (= 2 digit) string-end)
+  "Return a regular expression matching a valid diary entry.")
+
 ;;;###autoload
 (defun giornata-from-calendar ()
   "Create an entry in the diary for the date at point."
