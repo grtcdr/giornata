@@ -2,10 +2,9 @@
 
 ;; Copyright (C) 2023 Taha Aziz Ben Ali
 
-(require 'calendar)
 (require 'giornata)
-
-(declare-function iso8601-parse-date "iso8601" (string))
+(require 'calendar)
+(require 'iso8601)
 
 ;;;###autoload
 (defun giornata-from-calendar ()
