@@ -76,15 +76,15 @@ DATE must be a valid ISO 8601 date."
 	  (after giornata-highlight-entries activate)
 	"Highlight the days with an associated journal entry."
 	(let ((monthly-entries
-	       ;; Needlessly convert the format of every entry from YEAR-MONTH-DAY
-	       ;; to MONTH-DAY-YEAR (as the calendar's internal library makes some
-	       ;; terrible assumptions)
+	       ;; Needlessly convert the format of every entry from
+	       ;; YEAR-MONTH-DAY to MONTH-DAY-YEAR (as the calendar's internal
+	       ;; library makes some terrible assumptions).
 	       (mapcar (lambda (date)
 			 (let ((year  (nth 0 date))
 			       (month (nth 1 date))
 			       (day   (nth 2 date)))
 			   (list month day year)))
-		       ;; A month may be display for which no entries have yet
+		       ;; A month may be displayed for which no entries have yet
 		       ;; been made.
 		       (ignore-error 'file-missing
 			 (giornata--entries-as-dates year month)))))
