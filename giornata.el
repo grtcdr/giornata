@@ -16,7 +16,7 @@
   :group 'giornata)
 
 (defconst giornata--entry-regexp
-  (rx (= 2 digit))
+  (rx string-start (= 2 digit) string-end)
   "Return non-nil if filename is considered a valid journal entry.")
 
 (defvar giornata-front-matter
