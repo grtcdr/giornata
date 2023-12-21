@@ -2,16 +2,20 @@
 #+FILETAGS: :giornata:oss:
 #+CATEGORY: giornata
 
-* Integrate with the built-in calendar :emacs: [0/2]
-** TODO Create entries from the calendar
-** TODO Highlight days with a diary entry
-* TODO Explore the kind of metadata that helps in a journaling context
-* TODO Refactor construction of front matter :emacs:
+* TODO Write some unit tests :emacs:
+* DONE Integrate with the built-in calendar :emacs:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2023-12-21 Thu 14:08]
+:END:
+- Work on this has begun at the =calendar= branch.
+* DONE Refactor construction of front matter :emacs:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2023-12-19 Tue 18:14]
+:END:
 - It feels hacky and limited, front matter should be constructed in a more
   elegant and extensible manner.
 - Consider using Denote as a reference.
 * TODO Hack on consult to provide search functionality :emacs:
 - Provide this functionality as an optional extension (~giornata-consult~)
 * TODO Try pandoc as an export backend :design:
-SCHEDULED: <2023-12-15 Fri>
 * TODO Try xapian as a search engine :design:
