@@ -17,7 +17,7 @@
 
 (defvar giornata-front-matter
   (concat "---\n"
-	  "title: %a, %y-%m-%d\n"
+	  "date: %a, %y-%m-%d\n"
 	  "---\n\n"))
 
 (defun giornata-front-matter-spec (time)
