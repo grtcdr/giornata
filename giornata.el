@@ -63,4 +63,11 @@ TIMESTAMP is a time value."
   (unless (eq major-mode 'markdown-mode)
     (markdown-mode)))
 
+;;;###autoload
+(defun giornata-consult ()
+  (interactive)
+  (if (require 'consult nil :noerror)
+      (consult--grep "Search" #'consult--grep-make-builder giornata-directory nil)
+    (user-error "`consult' is not available.")))
+
 (provide 'giornata)
