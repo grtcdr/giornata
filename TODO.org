@@ -1,10 +1,9 @@
-#+title: To-dos
-#+filetags: :giornata:oss:
-#+category: giornata
+#+TITLE: To-dos
+#+FILETAGS: :giornata:oss:
+#+CATEGORY: giornata
 
+* TODO Work on the Haunt frontend
 * TODO Write some unit tests
-* TODO Hack on consult to provide search functionality
-- Provide this functionality as an optional extension (~giornata-consult~)
 * Archive :ARCHIVE:
 ** DONE Refactor construction of front matter
 :PROPERTIES:
@@ -24,3 +23,11 @@
 - State "DONE"       from "TODO"       [2023-12-21 Thu 14:08]
 :END:
 - Work on this has begun at the =calendar= branch.
+** DONE Hack on consult to provide search functionality
+:PROPERTIES:
+:ARCHIVE_TIME: 2023-12-25 Mon 04:10
+:END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2023-12-25 Mon 04:10]
+:END:
+- Provide this functionality as an optional extension (~giornata-consult~)
