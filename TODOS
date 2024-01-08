@@ -1,8 +1,8 @@
+# -*- mode: org -*-
 #+TITLE: To-dos
 #+FILETAGS: :giornata:oss:
 #+CATEGORY: giornata
 
-* TODO Work on the Haunt frontend
 * TODO Write some unit tests
 * Archive :ARCHIVE:
 ** DONE Refactor construction of front matter
