@@ -52,7 +52,7 @@ TIMESTAMP is a time value."
 	 (directory (expand-file-name (format "%04d/%02d" year month) giornata-directory))
 	 (filename  (expand-file-name (format "%02d" day) directory)))
     (make-directory directory :parents)
-    (find-file-other-window filename)
+    (find-file filename)
     (when (= (point-min) (point-max))
       (insert (giornata--format-front-matter time)))
     (unless (eobp)
