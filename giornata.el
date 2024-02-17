@@ -73,4 +73,26 @@ TIMESTAMP is a time value."
       (consult--grep "Search" #'consult--grep-make-builder giornata-directory nil)
     (user-error "`consult' is not available.")))
 
+(defcustom giornata-dir-locals
+  '((fundamental-mode . ((mode . markdown)
+			 (mode . auto-fill)
+			 (mode . olivetti)
+			 (mode . buffer-face)
+			 (cursor-type . bar)
+			 (olivetti-body-width . 0.4))))
+  "Generic directory local variables."
+  :type 'list)
+
+;;;###autoload
+(defun giornata-scaffold ()
+  "Scaffold `giornata-directory' with a predefined configuration."
+  (interactive)
+  (save-window-excursion
+    (find-file (file-name-concat giornata-directory dir-locals-file))
+    (if (= (point-min) (point-max))
+	(progn
+	  (insert (format "%S" giornata-dir-locals))
+	  (save-buffer))
+      (user-error "There already exists a \"%s\" file in \"%s\"." dir-locals-file giornata-directory))))
+
 (provide 'giornata)
