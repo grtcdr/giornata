@@ -23,6 +23,16 @@
 	  "date: %a, %y-%m-%d\n"
 	  "---\n\n"))
 
+(defcustom giornata-dir-locals
+  '((fundamental-mode . ((mode . markdown)
+			 (mode . auto-fill)
+			 (mode . olivetti)
+			 (mode . buffer-face)
+			 (cursor-type . bar)
+			 (olivetti-body-width . 0.4))))
+  "Generic directory local variables."
+  :type 'list)
+
 (defun giornata-front-matter-spec (time)
   "Return a specification alist for `giornata-front-matter'.
 TIME is a list such as the one returned by `decode-time'."
@@ -42,6 +52,11 @@ Internally, this formats `giornata-front-matter' using
   (format-spec giornata-front-matter
 	       (giornata-front-matter-spec time)))
 
+
+(defun giornata-buffer-empty? ()
+  "Return non-nil if buffer is empty."
+  (= (point-min) (point-max)))
+
 (defun giornata--create-entry (timestamp)
   "Create or visit the entry corresponding to TIMESTAMP.
 TIMESTAMP is a time value."
@@ -53,7 +68,7 @@ TIMESTAMP is a time value."
 	 (filename  (expand-file-name (format "%02d" day) directory)))
     (make-directory directory :parents)
     (find-file filename)
-    (when (= (point-min) (point-max))
+    (when (giornata-buffer-empty?)
       (insert (giornata--format-front-matter time)))
     (unless (eobp)
       (goto-char (point-max)))))
@@ -73,23 +88,13 @@ TIMESTAMP is a time value."
       (consult--grep "Search" #'consult--grep-make-builder giornata-directory nil)
     (user-error "`consult' is not available.")))
 
-(defcustom giornata-dir-locals
-  '((fundamental-mode . ((mode . markdown)
-			 (mode . auto-fill)
-			 (mode . olivetti)
-			 (mode . buffer-face)
-			 (cursor-type . bar)
-			 (olivetti-body-width . 0.4))))
-  "Generic directory local variables."
-  :type 'list)
-
 ;;;###autoload
 (defun giornata-scaffold ()
   "Scaffold `giornata-directory' with a predefined configuration."
   (interactive)
   (save-window-excursion
     (find-file (file-name-concat giornata-directory dir-locals-file))
-    (if (= (point-min) (point-max))
+    (if (giornata-buffer-empty?)
 	(progn
 	  (insert (format "%S" giornata-dir-locals))
 	  (save-buffer))
