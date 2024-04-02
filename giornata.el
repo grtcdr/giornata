@@ -114,7 +114,7 @@ used to determine what front matter to insert."
   (giornata--create-entry (current-time)))
 
 ;;;###autoload
-(defun giornata-search ()
+(defun giornata-consult ()
   (interactive)
   (if (require 'consult nil :noerror)
       (consult--grep "Search" #'consult--grep-make-builder giornata-directory nil)
