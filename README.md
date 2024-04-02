@@ -31,8 +31,10 @@ interactive function that opens today's journal entry and places the cursor at
 the end of the buffer.
 
 Uh oh, did you forget to journal yesterday? Well, that shouldn't be a problem,
-you can open the `calendar`, click[^1] on yesterday and begin to write whatever
-it is you did that day.
+you can open the `calendar`, click on yesterday and begin to write whatever it
+is you did that day. `giornata-from-calendar` will create a journal entry for
+the date at point, consider binding it to the return key or the left mouse
+button.
 
 That's everything you need to know to get started.
 
@@ -55,8 +57,3 @@ This package is not yet available on any archives so you'll have to obtain it
 from source by evaluating the following:
 
     (package-vc-install "https://git.sr.ht/~grtcdr/giornata")
-
-# Footnotes
-
-[^1]: `giornata-from-calendar` will create a journal entry for the date at
-    point, consider binding it to the return key or the left mouse button.
