@@ -1,10 +1,11 @@
-`giornata` is a foolishly simple journaling system, it looks like this:
+`giornata` is a foolishly simple journaling system, the hierarchy of the system
+looks like this:
 
-    2024        <---  year
-    ├── 01      <----  month
-    │   ├── 01  <-----  day: markdown, org, text, whatever floats your boat.
-    │   ├── 02
-    │   ├── 03
+    2024
+    ├── 01
+    │   ├── 01  <-  journal entry -
+    │   ├── 02       markdown, org, text, ...
+    │   ├── 03       whatever floats your boat.
     │   ├── ..
     │   ├── 30
     │   └── 31
