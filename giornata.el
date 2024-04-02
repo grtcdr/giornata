@@ -119,6 +119,7 @@ used to determine what front matter to insert."
 
 ;;;###autoload
 (defun giornata-consult ()
+  "Search `giornata-directory' with `grep' via `consult' package."
   (interactive)
   (if (require 'consult nil :noerror)
       (consult--grep "Search" #'consult--grep-make-builder giornata-directory nil)
