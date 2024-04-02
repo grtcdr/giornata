@@ -3,9 +3,9 @@ looks like this:
 
     2024
     ├── 01
-    │   ├── 01  <-  journal entry -
-    │   ├── 02        markdown, org, text, ...
-    │   ├── 03        whatever floats your boat.
+    │   ├── 01  <--  journal entry -
+    │   ├── 02         markdown, org, text, ...
+    │   ├── 03         whatever floats your boat.
     │   ├── ..
     │   ├── 30
     │   └── 31
