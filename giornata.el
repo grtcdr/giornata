@@ -2,6 +2,10 @@
 
 ;; Copyright (C) 2023 Taha Aziz Ben Ali
 
+;; Author: Taha Aziz Ben Ali <ba.tahaaziz@gmail.com>
+;; Maintainer: Taha Aziz Ben Ali <ba.tahaaziz@gmail.com>
+;; Version: 2024.04.03
+
 (declare-function consult--grep "consult" (prompt make-builder dir initial))
 (declare-function consult--grep-make-builder "consult" (paths))
 (declare-function calendar-day-name "calendar" (date &optional abbrev absolute))
