@@ -54,7 +54,9 @@ variables.
 
 # Installation
 
-This package is not yet available on any archives so you'll have to obtain it
-from source by evaluating the following:
+`giornata` is not yet available in any package archive so you'll have to obtain
+it from source by evaluating the following:
 
-    (package-vc-install "https://git.sr.ht/~grtcdr/giornata")
+``` emacs-lisp
+(package-vc-install "https://git.sr.ht/~grtcdr/giornata" "2024.02.19")
+```
