@@ -21,9 +21,7 @@
 	     (day   (nth 1 date))
 	     (time  (encode-time (list 0 0 0 day month year))))
 	(calendar-exit t)
-	(giornata--create-entry time)
-	(unless (eq major-mode 'markdown-mode)
-	  (markdown-mode)))
+	(giornata--create-entry time))
     (void-variable
      (and (yes-or-no-p "See the calendar first?")
 	  (calendar)))))
