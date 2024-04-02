@@ -37,6 +37,13 @@ is you did that day. `giornata-from-calendar` will create a journal entry for
 the date at point, consider binding it to the return key or the left mouse
 button.
 
+You could also hook into the calendar to have it highlight days with a
+corresponding journal entry:
+
+```
+(add-hook 'calendar-mode-hook #'giornata-calendar-mode)
+```
+
 That's everything you need to know to get started.
 
 # Configuration
