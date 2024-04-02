@@ -67,3 +67,13 @@ it from source by evaluating the following:
 ``` emacs-lisp
 (package-vc-install "https://git.sr.ht/~grtcdr/giornata" "2024.04.03")
 ```
+
+# Support
+
+If you wish to contribute a patch, inquire about something or share your
+feedback, you are welcome to send an email to
+[~grtcdr/pub@lists.sr.ht][mailing-list]. If you encounter issues of any kind,
+please file them in the project's [ticket-tracker][ticket-tracker].
+
+[mailing-list]: mailto:~grtcdr/pub@lists.sr.ht
+[ticket-tracker]: https://todo.sr.ht/~grtcdr/giornata
