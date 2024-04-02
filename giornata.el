@@ -2,8 +2,6 @@
 
 ;; Copyright (C) 2023 Taha Aziz Ben Ali
 
-(require 'markdown-mode)
-
 (declare-function consult--grep "consult" (prompt make-builder dir initial))
 (declare-function consult--grep-make-builder "consult" (paths))
 (declare-function calendar-day-name "calendar" (date &optional abbrev absolute))
