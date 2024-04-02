@@ -1,3 +1,13 @@
+# 2024.04.03
+
+- Make the major mode a customizable option
+
+  You're not limited to just `markdown-mode`, you can any of the currently
+  supported file formats (Org, Markdown, or plain and unencumbered text) you
+  like and the front matter will follow suit.
+
+- Remove dependency on `markdown-mode`
+
 # 2024.02.19
 
 - Add a function, `giornata-scaffold`, to scaffold a predefined configuration
