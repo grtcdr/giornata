@@ -65,5 +65,5 @@ variables.
 it from source by evaluating the following:
 
 ``` emacs-lisp
-(package-vc-install "https://git.sr.ht/~grtcdr/giornata" "2024.02.19")
+(package-vc-install "https://git.sr.ht/~grtcdr/giornata" "2024.04.03")
 ```
