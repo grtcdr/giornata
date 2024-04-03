@@ -28,11 +28,11 @@ method, the one you'll be using most often, is to call `giornata-today`, an
 interactive function that opens today's journal entry and places the cursor at
 the end of the buffer.
 
-Uh oh, did you forget to journal yesterday? Well, that shouldn't be a problem,
-you can open the `calendar`, click on yesterday and begin to write whatever it
-is you did that day. `giornata-from-calendar` will create a journal entry for
-the date at point, consider binding it to the return key or the left mouse
-button.
+Uh oh, did you forget to journal yesterday? Well, that shouldn't be a problem.
+If the `calendar` is open, `giornata-from-calendar` can help create a journal
+entry for the date at point, consider binding it to the return key or the left
+mouse button, you may then click on yesterday and begin to write whatever it is
+you did that day.
 
 You could also hook into the calendar to have it highlight days with a
 corresponding journal entry:
