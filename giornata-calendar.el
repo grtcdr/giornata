@@ -1,4 +1,4 @@
-;;; giornata.el --- Integration with the built-in calendar -*- lexical-binding: t -*-
+;;; giornata-calendar.el --- Integration with the built-in calendar -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2023 Taha Aziz Ben Ali
 
