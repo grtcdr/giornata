@@ -55,7 +55,7 @@ TIME is a list such as the one returned by `decode-time'."
 	  (cons ?d (format "%02d" day)))))
 
 (defun giornata--format-front-matter (mode time)
-  "Return the formatted front matter.
+  "Return the formatted front matter specific to MODE.
 TIME is a list such as the one returned by `decode-time'.
 Internally, this formats `giornata-front-matter' using
 `giornata-front-matter-spec'."
@@ -93,7 +93,7 @@ Internally, this formats `giornata-front-matter' using
 
 (defun giornata--create-entry (timestamp)
   "Create or visit the entry corresponding to TIMESTAMP.
-TIMESTAMP is a time value. MODE is the default major mode, it is
+TIMESTAMP is a time value.  MODE is the default major mode, it is
 used to determine what front matter to insert."
   (let* ((time      (decode-time timestamp))
 	 (year      (decoded-time-year time))
@@ -127,7 +127,7 @@ used to determine what front matter to insert."
 
 ;;;###autoload
 (defun giornata-scaffold ()
-  "Scaffold `giornata-directory' with `giornata-dir-locals'."
+  "Scaffold `giornata-directory' with variable `giornata-dir-locals'."
   (interactive)
   (save-window-excursion
     (find-file (file-name-concat giornata-directory dir-locals-file))
