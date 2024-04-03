@@ -127,7 +127,7 @@ used to determine what front matter to insert."
 
 ;;;###autoload
 (defun giornata-scaffold ()
-  "Scaffold `giornata-directory' with a predefined configuration."
+  "Scaffold `giornata-directory' with `giornata-dir-locals'."
   (interactive)
   (save-window-excursion
     (find-file (file-name-concat giornata-directory dir-locals-file))
