@@ -17,9 +17,6 @@ looks like this:
 
 # Introduction
 
-It's quite opinionated, but if the design choices click with you, you will find
-joy in how simple it is.
-
 Let's go over the foundations of this system:
 1. Writing something in the journal should be very quick; you shouldn't have to
    think about it.
