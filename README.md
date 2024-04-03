@@ -1,4 +1,4 @@
-`giornata` is a foolishly simple journaling system, the hierarchy of the system
+Giornata is a foolishly simple journaling system, the hierarchy of the system
 looks like this:
 
     2024
@@ -23,7 +23,7 @@ Let's go over the foundations of this system:
 2. Reviewing the journal should be intuitive; and that might as well be an
    interactive calendar.
 
-Writing something in `giornata` can be done in one of two ways: the first
+Writing something with Giornata can be done in one of two ways: the first
 method, the one you'll be using most often, is to call `giornata-today`, an
 interactive function that opens today's journal entry and places the cursor at
 the end of the buffer.
@@ -60,8 +60,8 @@ variables.
 
 # Installation
 
-`giornata` is not yet available in any package archive so you'll have to obtain
-it from source by evaluating the following:
+Giornata is not yet available in any package archive so you'll have to obtain it
+from source by evaluating the following:
 
 ``` emacs-lisp
 (package-vc-install "https://git.sr.ht/~grtcdr/giornata" "2024.04.03")
