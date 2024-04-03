@@ -44,7 +44,9 @@ corresponding journal entry:
 (add-hook 'calendar-mode-hook #'giornata-calendar-mode)
 ```
 
-That's everything you need to know to get started.
+![Calendar with some days highlighted][calendar-preview]
+
+That's everything you need to know to get started, happy journaling!
 
 # Configuration
 
@@ -77,3 +79,4 @@ please file them in the project's [ticket-tracker][ticket-tracker].
 
 [mailing-list]: mailto:~grtcdr/pub@lists.sr.ht
 [ticket-tracker]: https://todo.sr.ht/~grtcdr/giornata
+[calendar-preview]: media/calendar.webp
