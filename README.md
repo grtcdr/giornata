@@ -1,19 +1,28 @@
-Giornata is a foolishly simple journaling system, the hierarchy of the system
-looks like this:
+Giornata is a foolishly simple journaling system for Emacs. It's hierarchical in
+nature and that's rooted in how the journal's files are organized.
 
-    2024
-    ├── 01
-    │   ├── 01  <--  journal entry -
-    │   ├── 02         markdown, org, text, ...
-    │   ├── 03         whatever floats your boat.
-    │   ├── ..
-    │   ├── 30
-    │   └── 31
-    └── 02
-        ├── 01
-        ├── 02
-        ├── 03
-        └── and so on...
+	~/diary
+	└── 2024
+		├── 01
+		│   ├── 01
+		│   ├── 02
+		│   ├── 03
+		│   ├── ..
+		│   ├── 30
+		│   └── 31
+		└── 02
+			├── 01
+			├── 02
+			├── 03
+			└── and so on...
+
+The right-most digits are journal entries, their file extension is purposefully
+omitted because Giornata is not tied to any particular file format, you can
+choose whatever you feel most comfortable with. The year and month are just
+directories.
+
+Giornata is responsible for creating these files and directories, so you can
+focus on writing.
 
 # Introduction
 
