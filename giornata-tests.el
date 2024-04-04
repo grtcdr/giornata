@@ -1,3 +1,5 @@
+;;; giornata-tests.el --- Integration test suite -*- lexical-binding: t -*-
+
 (require 'ert)
 (require 'giornata)
 (require 'giornata-calendar)
@@ -54,3 +56,37 @@ temporary directory.  `current-time' will be set to a fake time."
      (call-interactively #'giornata-scaffold))
    (should (equal (giornata-default-format) 'markdown))))
 
+(defmacro with-giornata-front-matter (&rest body)
+  "Evaluate BODY with a preset `giornata-front-matter'."
+  (declare (indent nil))
+  `(let ((time (decode-time (current-time)))
+	 (giornata-front-matter
+	  '((markdown-mode . "---\ndate: %A, %y-%m-%d\n---\n")
+	    (org-mode . "#+DATE: <%y-%m-%d %a>\n")
+	    (text-mode . "%A, %y-%m-%d\n"))))
+     ,@body))
+
+(ert-deftest giornata--format-front-matter:markdown-mode ()
+  (with-giornata-front-matter
+   (should
+    (string-equal
+     (giornata--format-front-matter 'markdown-mode time)
+     "---\ndate: Monday, 2024-01-01\n---\n"))))
+
+(ert-deftest giornata--format-front-matter:org-mode ()
+  (with-giornata-front-matter
+   (should
+    (string-equal
+     (giornata--format-front-matter 'org-mode time)
+     "#+DATE: <2024-01-01 Mon>\n"))))
+
+(ert-deftest giornata--format-front-matter:text-mode ()
+  (with-giornata-front-matter
+   (should
+    (string-equal
+     (giornata--format-front-matter 'text-mode time)
+     "Monday, 2024-01-01\n"))))
+
+(ert-deftest giornata-buffer-empty? ()
+  (with-temp-buffer
+    (should (equal (giornata-buffer-empty?) t))))
