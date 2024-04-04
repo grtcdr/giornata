@@ -4,6 +4,9 @@
 (require 'giornata)
 (require 'giornata-calendar)
 
+
+;;; Helpers
+
 (defmacro with-temporary-giornata-directory (&rest body)
   "Evaluate BODY deterministically.
 
@@ -14,12 +17,44 @@ temporary directory.  `current-time' will be set to a fake time."
      (prog1 (progn ,@body)
        (delete-directory giornata-directory :recurse))))
 
+(defmacro with-giornata-front-matter (&rest body)
+  "Evaluate BODY with a preset `giornata-front-matter'."
+  (declare (indent nil))
+  `(let ((time (decode-time (current-time)))
+	 (giornata-front-matter
+	  '((markdown-mode . "---\ndate: %A, %y-%m-%d\n---\n")
+	    (org-mode . "#+DATE: <%y-%m-%d %a>\n")
+	    (text-mode . "%A, %y-%m-%d\n"))))
+     ,@body))
+
 (defun giornata-relative-entry (filename)
   "Return FILENAME relative to `giornata-directory'."
   (string-trim-left
    (string-remove-prefix
     (expand-file-name giornata-directory) filename)
    "/"))
+
+
+;;; Integration tests
+
+;;;; Primitive functions
+;;;; ---------------------------------------------
+
+(ert-deftest giornata--buffer-empty-p ()
+  "Check that `giornata--buffer-empty-p' works as expected."
+  (with-temp-buffer
+    (should (equal (giornata--buffer-empty-p) t)))
+  (with-temp-buffer
+    (insert "foo")
+    (should (equal (giornata--buffer-empty-p) nil))))
+
+(ert-deftest giornata--directory-p ()
+  "Check that `giornata--directory-p' works as expected."
+  (should (equal (giornata--directory-p "foo") nil))
+  ;; Month-matching
+  (should (numberp (giornata--directory-p "20")))
+  ;; Year-matching
+  (should (numberp (giornata--directory-p "2024"))))
 
 (ert-deftest giornata-today ()
   "Check that `giornata-today' works as expected."
@@ -30,6 +65,9 @@ temporary directory.  `current-time' will be set to a fake time."
 	  (first (giornata-relative-entry (car entries))))
      (should (equal (length entries) 1))
      (should (string-equal first "2024/01/01")))))
+
+;;;; User-facing functions
+;;;; ---------------------------------------------
 
 (ert-deftest giornata-scaffold ()
   "Check that `giornata-scaffold' works as expected."
@@ -56,17 +94,9 @@ temporary directory.  `current-time' will be set to a fake time."
      (call-interactively #'giornata-scaffold))
    (should (equal (giornata-default-format) 'markdown))))
 
-(defmacro with-giornata-front-matter (&rest body)
-  "Evaluate BODY with a preset `giornata-front-matter'."
-  (declare (indent nil))
-  `(let ((time (decode-time (current-time)))
-	 (giornata-front-matter
-	  '((markdown-mode . "---\ndate: %A, %y-%m-%d\n---\n")
-	    (org-mode . "#+DATE: <%y-%m-%d %a>\n")
-	    (text-mode . "%A, %y-%m-%d\n"))))
-     ,@body))
-
 (ert-deftest giornata--format-front-matter:markdown-mode ()
+  "Check that `giornata--format-front-matter' works as expected for
+`markdown-mode'."
   (with-giornata-front-matter
    (should
     (string-equal
@@ -74,6 +104,8 @@ temporary directory.  `current-time' will be set to a fake time."
      "---\ndate: Monday, 2024-01-01\n---\n"))))
 
 (ert-deftest giornata--format-front-matter:org-mode ()
+  "Check that `giornata--format-front-matter' works as expected for
+`org-mode'."  
   (with-giornata-front-matter
    (should
     (string-equal
@@ -81,12 +113,10 @@ temporary directory.  `current-time' will be set to a fake time."
      "#+DATE: <2024-01-01 Mon>\n"))))
 
 (ert-deftest giornata--format-front-matter:text-mode ()
+  "Check that `giornata--format-front-matter' works as expected for
+`text-mode'."  
   (with-giornata-front-matter
    (should
     (string-equal
      (giornata--format-front-matter 'text-mode time)
      "Monday, 2024-01-01\n"))))
-
-(ert-deftest giornata-buffer-empty? ()
-  (with-temp-buffer
-    (should (equal (giornata-buffer-empty?) t))))
