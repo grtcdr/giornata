@@ -46,7 +46,7 @@ temporary directory.  `current-time' will be set to a fake time."
     (should (equal (giornata--buffer-empty-p) t)))
   (with-temp-buffer
     (insert "foo")
-    (should (equal (giornata--buffer-empty-p) nil))))
+    (should (not (giornata--buffer-empty-p)))))
 
 (ert-deftest giornata--directory-p ()
   "Check that `giornata--directory-p' works as expected."
