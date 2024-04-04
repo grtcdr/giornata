@@ -56,6 +56,9 @@ temporary directory.  `current-time' will be set to a fake time."
   ;; Year-matching
   (should (numberp (giornata--directory-p "2024"))))
 
+;;;; User-facing functions
+;;;; ---------------------------------------------
+
 (ert-deftest giornata-today ()
   "Check that `giornata-today' works as expected."
   (with-temporary-giornata-directory
@@ -65,9 +68,6 @@ temporary directory.  `current-time' will be set to a fake time."
 	  (first (giornata-relative-entry (car entries))))
      (should (equal (length entries) 1))
      (should (string-equal first "2024/01/01")))))
-
-;;;; User-facing functions
-;;;; ---------------------------------------------
 
 (ert-deftest giornata-scaffold ()
   "Check that `giornata-scaffold' works as expected."
