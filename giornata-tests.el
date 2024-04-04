@@ -1,4 +1,8 @@
-;;; giornata-tests.el --- Integration test suite -*- lexical-binding: t -*-
+;;; giornata-tests.el --- Test suite -*- lexical-binding: t -*-
+
+;;; This test suite includes both unit and integration tests, the latter must be
+;;; frozen in time so faketime(1) is a hard requirement for most tests to
+;;; succeed.
 
 (require 'ert)
 (require 'giornata)
@@ -35,10 +39,7 @@ temporary directory.  `current-time' will be set to a fake time."
    "/"))
 
 
-;;; Integration tests
-
-;;;; Primitive functions
-;;;; ---------------------------------------------
+;;; Unit tests
 
 (ert-deftest giornata--buffer-empty-p ()
   "Check that `giornata--buffer-empty-p' works as expected."
@@ -56,8 +57,35 @@ temporary directory.  `current-time' will be set to a fake time."
   ;; Year-matching
   (should (numberp (giornata--directory-p "2024"))))
 
-;;;; User-facing functions
-;;;; ---------------------------------------------
+(ert-deftest giornata--format-front-matter:markdown-mode ()
+  "Check that `giornata--format-front-matter' works as expected for
+`markdown-mode'."
+  (with-giornata-front-matter
+   (should
+    (string-equal
+     (giornata--format-front-matter 'markdown-mode time)
+     "---\ndate: Monday, 2024-01-01\n---\n"))))
+
+(ert-deftest giornata--format-front-matter:org-mode ()
+  "Check that `giornata--format-front-matter' works as expected for
+`org-mode'."
+  (with-giornata-front-matter
+   (should
+    (string-equal
+     (giornata--format-front-matter 'org-mode time)
+     "#+DATE: <2024-01-01 Mon>\n"))))
+
+(ert-deftest giornata--format-front-matter:text-mode ()
+  "Check that `giornata--format-front-matter' works as expected for
+`text-mode'."
+  (with-giornata-front-matter
+   (should
+    (string-equal
+     (giornata--format-front-matter 'text-mode time)
+     "Monday, 2024-01-01\n"))))
+
+
+;;; Integration tests
 
 (ert-deftest giornata-today ()
   "Check that `giornata-today' works as expected."
@@ -93,30 +121,3 @@ temporary directory.  `current-time' will be set to a fake time."
 	  '((fundamental-mode . ((mode . markdown))))))
      (call-interactively #'giornata-scaffold))
    (should (equal (giornata-default-format) 'markdown))))
-
-(ert-deftest giornata--format-front-matter:markdown-mode ()
-  "Check that `giornata--format-front-matter' works as expected for
-`markdown-mode'."
-  (with-giornata-front-matter
-   (should
-    (string-equal
-     (giornata--format-front-matter 'markdown-mode time)
-     "---\ndate: Monday, 2024-01-01\n---\n"))))
-
-(ert-deftest giornata--format-front-matter:org-mode ()
-  "Check that `giornata--format-front-matter' works as expected for
-`org-mode'."  
-  (with-giornata-front-matter
-   (should
-    (string-equal
-     (giornata--format-front-matter 'org-mode time)
-     "#+DATE: <2024-01-01 Mon>\n"))))
-
-(ert-deftest giornata--format-front-matter:text-mode ()
-  "Check that `giornata--format-front-matter' works as expected for
-`text-mode'."  
-  (with-giornata-front-matter
-   (should
-    (string-equal
-     (giornata--format-front-matter 'text-mode time)
-     "Monday, 2024-01-01\n"))))
