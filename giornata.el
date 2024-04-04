@@ -65,7 +65,7 @@ Internally, this formats `giornata-front-matter' using
     (format-spec front-matter
 		 (giornata-front-matter-spec time))))
 
-(defun giornata-buffer-empty? ()
+(defun giornata--buffer-empty-p ()
   "Return non-nil if buffer is empty."
   (= (point-min) (point-max)))
 
@@ -106,7 +106,7 @@ used to determine what front matter to insert."
     (find-file filename)
     (unless (eq major-mode mode)
       (funcall major-mode))
-    (when (giornata-buffer-empty?)
+    (when (giornata--buffer-empty-p)
       (insert (giornata--format-front-matter mode time)))
     (unless (eobp)
       (goto-char (point-max)))))
@@ -131,7 +131,7 @@ used to determine what front matter to insert."
   (interactive)
   (save-window-excursion
     (find-file (file-name-concat giornata-directory dir-locals-file))
-    (if (giornata-buffer-empty?)
+    (if (giornata--buffer-empty-p)
 	(progn
 	  (insert (format "%S" giornata-dir-locals))
 	  (save-buffer))
