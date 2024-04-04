@@ -1,0 +1,7 @@
+image: guix
+sources:
+  - https://git.sr.ht/~grtcdr/giornata
+tasks:
+  - test: |
+      cd giornata
+      guix shell --container --pure test-shell.scm -- make test
