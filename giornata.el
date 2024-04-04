@@ -27,9 +27,9 @@
 		 "date: %A, %y-%m-%d\n"
 		 "---\n\n"))
    (cons 'org-mode
-	 (concat "#+DATE: <%d-%m-%y %a>\n\n"))
+	 (concat "#+DATE: <%y-%m-%d %a>\n\n"))
    (cons 'text-mode
-	 (concat "%A, %d-%m-%y\n\n"))))
+	 (concat "%A, %y-%m-%d\n\n"))))
 
 (defcustom giornata-dir-locals
   '((fundamental-mode
