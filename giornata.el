@@ -65,7 +65,8 @@ If you're using `org-mode', consider using this:
 This variable determines the configuration that
 `giornata-scaffold' saves to the `dir-locals-file' relative to
 the `giornata-directory'."
-  :type 'list)
+  :type '(alist)
+  :link '(info-link "(emacs)Directory Variables"))
 
 (defun giornata-front-matter-spec (time)
   "Return a specification alist for `giornata-front-matter'.
