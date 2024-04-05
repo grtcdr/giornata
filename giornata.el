@@ -20,16 +20,37 @@
   :type 'directory
   :group 'giornata)
 
-(defvar giornata-front-matter
-  (list
-   (cons 'markdown-mode
-	 (concat "---\n"
-		 "date: %A, %y-%m-%d\n"
-		 "---\n\n"))
-   (cons 'org-mode
-	 (concat "#+DATE: <%y-%m-%d %a>\n\n"))
-   (cons 'text-mode
-	 (concat "%A, %y-%m-%d\n\n"))))
+(defcustom giornata-front-matter
+  "* %A, %d-%m-%y\n\n"
+  "String to be inserted at the top of a newly opened journal entry.
+
+This variable is processed by `giornata-front-matter-spec' to
+produce the final front matter.
+
+The following format strings, if encountered, are expanded to
+their associated value:
+
+    %A, the day of the week,
+    %a, like %A but abbreviated,
+    %y, the year,
+    %m, the month,
+    %d, the day.
+
+What you set this variable to depends on the file format you
+choose to write in.
+
+If you're using `markdown-mode', you could use:
+
+    (setq giornata-front-matter
+      (concat \"---\\n\"
+	      \"date: %A, %y-%m-%d\\n\"
+	      \"---\\n\\n\"))
+
+If you're using `org-mode', consider using this:
+
+    (setq giornata-front-matter \"#+DATE: <%d-%m-%y %a>\\n\\n\")
+"
+  :type 'string)
 
 (defcustom giornata-dir-locals
   '((fundamental-mode
@@ -39,7 +60,11 @@
 	(mode . buffer-face)
 	(cursor-type . bar)
 	(olivetti-body-width . 0.4))))
-  "Generic directory local variables."
+  "Generic directory local variables.
+
+This variable determines the configuration that
+`giornata-scaffold' saves to the `dir-locals-file' relative to
+the `giornata-directory'."
   :type 'list)
 
 (defun giornata-front-matter-spec (time)
@@ -54,16 +79,13 @@ TIME is a list such as the one returned by `decode-time'."
 	  (cons ?m (format "%02d" month))
 	  (cons ?d (format "%02d" day)))))
 
-(defun giornata--format-front-matter (mode time)
-  "Return the formatted front matter specific to MODE.
-TIME is a list such as the one returned by `decode-time'.
+(defun giornata--format-front-matter (time)
+  "Return the formatted front matter.
+TIME is a list such as that returned by `decode-time'.
 Internally, this formats `giornata-front-matter' using
 `giornata-front-matter-spec'."
-  (let ((front-matter
-	 (cdr (assoc mode
-		     giornata-front-matter))))
-    (format-spec front-matter
-		 (giornata-front-matter-spec time))))
+  (format-spec giornata-front-matter
+	       (giornata-front-matter-spec time)))
 
 (defun giornata--buffer-empty-p ()
   "Return non-nil if buffer is empty."
@@ -107,7 +129,7 @@ used to determine what front matter to insert."
     (unless (eq major-mode mode)
       (funcall major-mode))
     (when (giornata--buffer-empty-p)
-      (insert (giornata--format-front-matter mode time)))
+      (insert (giornata--format-front-matter time)))
     (unless (eobp)
       (goto-char (point-max)))))
 

@@ -21,16 +21,6 @@ temporary directory.  `current-time' will be set to a fake time."
      (prog1 (progn ,@body)
        (delete-directory giornata-directory :recurse))))
 
-(defmacro with-giornata-front-matter (&rest body)
-  "Evaluate BODY with a preset `giornata-front-matter'."
-  (declare (indent nil))
-  `(let ((time (decode-time (current-time)))
-	 (giornata-front-matter
-	  '((markdown-mode . "---\ndate: %A, %y-%m-%d\n---\n")
-	    (org-mode . "#+DATE: <%y-%m-%d %a>\n")
-	    (text-mode . "%A, %y-%m-%d\n"))))
-     ,@body))
-
 (defun giornata-relative-entry (filename)
   "Return FILENAME relative to `giornata-directory'."
   (string-trim-left
@@ -57,32 +47,14 @@ temporary directory.  `current-time' will be set to a fake time."
   ;; Year-matching
   (should (numberp (giornata--directory-p "2024"))))
 
-(ert-deftest giornata--format-front-matter:markdown-mode ()
-  "Check that `giornata--format-front-matter' works as expected for
-`markdown-mode'."
-  (with-giornata-front-matter
-   (should
-    (string-equal
-     (giornata--format-front-matter 'markdown-mode time)
-     "---\ndate: Monday, 2024-01-01\n---\n"))))
-
-(ert-deftest giornata--format-front-matter:org-mode ()
-  "Check that `giornata--format-front-matter' works as expected for
-`org-mode'."
-  (with-giornata-front-matter
-   (should
-    (string-equal
-     (giornata--format-front-matter 'org-mode time)
-     "#+DATE: <2024-01-01 Mon>\n"))))
-
-(ert-deftest giornata--format-front-matter:text-mode ()
-  "Check that `giornata--format-front-matter' works as expected for
-`text-mode'."
-  (with-giornata-front-matter
-   (should
-    (string-equal
-     (giornata--format-front-matter 'text-mode time)
-     "Monday, 2024-01-01\n"))))
+(ert-deftest giornata--format-front-matter ()
+  "Check that `giornata--format-front-matter' works as expected."
+  (let ((time (decode-time (current-time)))
+	(giornata-front-matter "%A (%a), %y-%m-%d"))
+    (should
+     (string-equal
+      (giornata--format-front-matter time)
+      "Monday (Mon), 2024-01-01"))))
 
 
 ;;; Integration tests
