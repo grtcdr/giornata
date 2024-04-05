@@ -54,12 +54,12 @@ If you're using `org-mode', consider using this:
 
 (defcustom giornata-dir-locals
   '((fundamental-mode
-     . ((mode . text)
-	(mode . auto-fill)
-	(mode . olivetti)
-	(mode . buffer-face)
-	(cursor-type . bar)
-	(olivetti-body-width . 0.4))))
+     ((mode . text)
+      (mode . auto-fill)
+      (mode . olivetti)
+      (mode . buffer-face)
+      (cursor-type . bar)
+      (olivetti-body-width . 0.4))))
   "Generic directory local variables.
 
 This variable determines the configuration that
