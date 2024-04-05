@@ -93,9 +93,9 @@ Internally, this formats `giornata-front-matter' using
 
 (defun giornata-dir-locals ()
   "Return the effective directory local variables of `giornata-directory'."
-  (let* ((directory (if (string-suffix-p "/" giornata-directory)
-			giornata-directory
-		      (concat giornata-directory "/")))
+  (let* ((directory
+	  (string-pad giornata-directory
+		      (1+ (length giornata-directory)) ?/))
 	 (class (intern directory))
 	 (variables (dir-locals-get-class-variables class)))
     (cond ((not variables)
