@@ -83,13 +83,24 @@ temporary directory.  `current-time' will be set to a fake time."
 	  (file-name-concat giornata-directory dir-locals-file))
 	 (buffer-string)))))))
 
-(ert-deftest giornata-default-format ()
-  "Check that `giornata-default-format' works as expected."
+(ert-deftest giornata--default-file-format ()
+  "Check that `giornata--default-file-format' works as expected."
   (with-temporary-giornata-directory
    ;; Without a dir-locals.el, `text' is the default format.
-   (should (equal (giornata-default-format) 'text))
-   ;; Check again with a modified `giornata-dir-locals'
+   (should (equal (giornata--default-file-format) 'text))
+   ;; Check again with a modified `giornata-dir-locals'.
    (let ((giornata-dir-locals
 	  '((fundamental-mode . ((mode . markdown))))))
      (call-interactively #'giornata-scaffold))
-   (should (equal (giornata-default-format) 'markdown))))
+   (should (equal (giornata--default-file-format) 'markdown))))
+
+(ert-deftest giornata--default-major-mode ()
+  "Check that `giornata--default-major-mode' works as expected."
+  (with-temporary-giornata-directory
+   ;; Without a dir-locals.el, `text' is the default format.
+   (should (equal (giornata--default-major-mode) 'text-mode))
+   ;; Check again with a modified `giornata-dir-locals'.
+   (let ((giornata-dir-locals
+	  '((fundamental-mode . ((mode . markdown))))))
+     (call-interactively #'giornata-scaffold))
+   (should (equal (giornata--default-major-mode) 'markdown-mode))))
