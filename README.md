@@ -45,6 +45,15 @@ whatever it is you did that day.
 
 That's everything you need to know to get started, happy journaling!
 
+# Installation
+
+Giornata is not yet available in any package archive so you'll have to obtain it
+from source by evaluating the following:
+
+``` emacs-lisp
+(package-vc-install "https://git.sr.ht/~grtcdr/giornata" "2024.04.03")
+```
+
 # Configuration
 
 Your journal is located in `giornata-directory`.
@@ -62,15 +71,6 @@ highlight days with a corresponding journal entry if you let it:
 
 ```
 (add-hook 'calendar-mode-hook #'giornata-calendar-mode)
-```
-
-# Installation
-
-Giornata is not yet available in any package archive so you'll have to obtain it
-from source by evaluating the following:
-
-``` emacs-lisp
-(package-vc-install "https://git.sr.ht/~grtcdr/giornata" "2024.04.03")
 ```
 
 # Support
