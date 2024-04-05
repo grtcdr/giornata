@@ -83,6 +83,8 @@ feedback, you are welcome to send an email to
 [~grtcdr/pub@lists.sr.ht][mailing-list]. If you encounter issues of any kind,
 please file them in the project's [ticket tracker][ticket-tracker].
 
+![builds.sr.ht status](https://builds.sr.ht/~grtcdr/giornata/commits.svg)
+
 [mailing-list]: mailto:~grtcdr/pub@lists.sr.ht
 [ticket-tracker]: https://todo.sr.ht/~grtcdr/giornata
 [calendar-preview]: media/calendar.webp
