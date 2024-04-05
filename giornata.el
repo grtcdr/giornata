@@ -113,20 +113,26 @@ Internally, this formats `giornata-front-matter' using
 	  (throw 'mode major-mode)))
       (quote text))))
 
+(defun giornata--default-major-mode ()
+  "Return the default major mode of journal entries."
+  (thread-first
+    (giornata--default-file-format)
+    (symbol-name)
+    (concat "-mode")
+    (intern)))
+
 (defun giornata--create-entry (timestamp)
   "Create or visit the entry corresponding to TIMESTAMP.
-TIMESTAMP is a time value.  MODE is the default major mode, it is
-used to determine what front matter to insert."
+TIMESTAMP is a time value."
   (let* ((time      (decode-time timestamp))
 	 (year      (decoded-time-year time))
 	 (month     (decoded-time-month time))
 	 (day       (decoded-time-day time))
 	 (directory (expand-file-name (format "%04d/%02d" year month) giornata-directory))
-	 (filename  (expand-file-name (format "%02d" day) directory))
-	 (mode      (intern (concat (symbol-name (giornata-default-format)) "-mode"))))
+	 (filename  (expand-file-name (format "%02d" day) directory)))
     (make-directory directory :parents)
     (find-file filename)
-    (unless (eq major-mode mode)
+    (unless (eq major-mode (giornata--default-major-mode))
       (funcall major-mode))
     (when (giornata--buffer-empty-p)
       (insert (giornata--format-front-matter time)))
