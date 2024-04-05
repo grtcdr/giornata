@@ -103,7 +103,7 @@ Internally, this formats `giornata-front-matter' using
 		(dir-locals-get-class-variables class)))
 	  (t variables))))
 
-(defun giornata-default-format ()
+(defun giornata--default-file-format ()
   "Return the default file format of journal entries."
   (let* ((variables (giornata-dir-locals))
 	 (fundamental (cdr (assoc 'fundamental-mode variables))))
