@@ -21,7 +21,7 @@ omitted because Giornata is not tied to any particular file format, you can
 choose whatever you feel most comfortable with. The year and month are just
 directories.
 
-Giornata is responsible for creating these files and directories, so you can
+Giornata is responsible for creating these files and directories so you can
 focus on writing.
 
 # Introduction
