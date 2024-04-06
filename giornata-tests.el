@@ -19,7 +19,38 @@ temporary directory.  `current-time' will be set to a fake time."
   (declare (indent nil))
   `(let ((giornata-directory (make-temp-file "giornata-" :directory)))
      (prog1 (progn ,@body)
-       (delete-directory giornata-directory :recurse))))
+       (delete-directory giornata-directory t))))
+
+(defun giornata-create-entries (number direction)
+  "Create the given NUMBER of entries in either DIRECTION."
+  (let ((index 0))
+    (while (> number index)
+      (setq index (1+ index))
+      (save-window-excursion
+	(calendar)
+	(cond ((eq direction 'forward)
+	       (calendar-forward-day index))
+	      ((eq direction 'backward)
+	       (calendar-backward-day index)))
+	(giornata-from-calendar)
+	(save-buffer)))))
+
+(defun giornata-relative-entry (filename)
+  "Return FILENAME relative to `giornata-directory'."
+  (string-trim-left
+   (string-remove-prefix
+    (expand-file-name giornata-directory) filename)
+   "/"))
+
+(defmacro with-giornata-front-matter (&rest body)
+  "Evaluate BODY with a preset `giornata-front-matter'."
+  (declare (indent nil))
+  `(let ((time (decode-time (current-time)))
+	 (giornata-front-matter
+	  '((markdown-mode . "---\ndate: %A, %y-%m-%d\n---\n")
+	    (org-mode . "#+DATE: <%y-%m-%d %a>\n")
+	    (text-mode . "%A, %y-%m-%d\n"))))
+     ,@body))
 
 (defun giornata-relative-entry (filename)
   "Return FILENAME relative to `giornata-directory'."
@@ -29,7 +60,7 @@ temporary directory.  `current-time' will be set to a fake time."
    "/"))
 
 
-;;; Unit tests
+;;; Tests
 
 (ert-deftest giornata--buffer-empty-p ()
   "Check that `giornata--buffer-empty-p' works as expected."
@@ -39,13 +70,20 @@ temporary directory.  `current-time' will be set to a fake time."
     (insert "foo")
     (should (not (giornata--buffer-empty-p)))))
 
+(ert-deftest giornata-from-calendar ()
+  "Check that `giornata-from-calendar' works as expected."
+  (with-temporary-giornata-directory
+   (giornata-create-entries 7 'forward)
+   (giornata-create-entries 7 'backward)
+   (should (= (length (giornata--entries)) 14))))
+
 (ert-deftest giornata--directory-p ()
   "Check that `giornata--directory-p' works as expected."
   (should (equal (giornata--directory-p "foo") nil))
   ;; Month-matching
-  (should (numberp (giornata--directory-p "20")))
+  (should (= (giornata--directory-p "20") 0))
   ;; Year-matching
-  (should (numberp (giornata--directory-p "2024"))))
+  (should (= (giornata--directory-p "2024") 0)))
 
 (ert-deftest giornata--format-front-matter ()
   "Check that `giornata--format-front-matter' works as expected."
@@ -55,9 +93,6 @@ temporary directory.  `current-time' will be set to a fake time."
      (string-equal
       (giornata--format-front-matter time)
       "Monday (Mon), 2024-01-01"))))
-
-
-;;; Integration tests
 
 (ert-deftest giornata-today ()
   "Check that `giornata-today' works as expected."
@@ -104,3 +139,11 @@ temporary directory.  `current-time' will be set to a fake time."
 	  '((fundamental-mode . ((mode . markdown))))))
      (call-interactively #'giornata-scaffold))
    (should (equal (giornata--default-major-mode) 'markdown-mode))))
+
+(ert-deftest giornata--date-as-list ()
+  "Check that `giornata--date-as-list' works as expected."
+  (should (equal (giornata--date-as-list "1985/03/20")
+		 (list 1985 03 20)))
+  ;; `giornata--date-as-list' only works with ISO 8601 dates.
+  (should-error (giornata--date-as-list "01/01/2000")
+		:type 'wrong-type-argument))
