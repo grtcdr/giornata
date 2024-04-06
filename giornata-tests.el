@@ -1,8 +1,15 @@
 ;;; giornata-tests.el --- Test suite -*- lexical-binding: t -*-
 
-;;; This test suite includes both unit and integration tests, the latter must be
-;;; frozen in time so faketime(1) is a hard requirement for most tests to
-;;; succeed.
+;; Copyright (C) 2023 Taha Aziz Ben Ali
+
+;; Author: Taha Aziz Ben Ali <ba.tahaaziz@gmail.com>
+;; Maintainer: Taha Aziz Ben Ali <ba.tahaaziz@gmail.com>
+;; License: ISC - See LICENSE for legalese
+;; Version: 2024.04.03
+
+;; This test suite includes both unit and integration tests, the latter must be
+;; frozen in time so faketime(1) is a hard requirement for most tests to
+;; succeed.
 
 (require 'ert)
 (require 'giornata)
