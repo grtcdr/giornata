@@ -3,8 +3,3 @@ test:
 	emacs --quick --batch --directory=$(CURDIR) \
 		--load giornata-tests.el \
 		--funcall ert-run-tests-batch-and-exit
-
-clean:
-	git clean -Xdf
-
-FORCE:
