@@ -22,7 +22,7 @@
   "Evaluate BODY deterministically.
 
 BODY will be evaluated with `giornata-directory' bound to a
-temporary directory.  `current-time' will be set to a fake time."
+temporary directory."
   (declare (indent nil))
   `(let ((giornata-directory (make-temp-file "giornata-" :directory)))
      (prog1 (progn ,@body)
