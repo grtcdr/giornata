@@ -49,16 +49,6 @@ temporary directory.  `current-time' will be set to a fake time."
     (expand-file-name giornata-directory) filename)
    "/"))
 
-(defmacro with-giornata-front-matter (&rest body)
-  "Evaluate BODY with a preset `giornata-front-matter'."
-  (declare (indent nil))
-  `(let ((time (decode-time (current-time)))
-	 (giornata-front-matter
-	  '((markdown-mode . "---\ndate: %A, %y-%m-%d\n---\n")
-	    (org-mode . "#+DATE: <%y-%m-%d %a>\n")
-	    (text-mode . "%A, %y-%m-%d\n"))))
-     ,@body))
-
 
 ;;; Tests
 
