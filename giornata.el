@@ -1,10 +1,8 @@
 ;;; giornata.el --- Foolishly simple journaling -*- lexical-binding: t -*-
 
-;; Copyright (C) 2023 Taha Aziz Ben Ali
-
-;; Author: Taha Aziz Ben Ali <ba.tahaaziz@gmail.com>
-;; Maintainer: Taha Aziz Ben Ali <ba.tahaaziz@gmail.com>
+;; Copyright (C) 2023 Taha Aziz Ben Ali <ba.tahaaziz@gmail.com>
 ;; License: ISC - See LICENSE for legalese
+;; Homepage: https://giornata.grtcdr.tn
 ;; Version: 2024.04.03
 
 (declare-function consult--grep "consult" (prompt make-builder dir initial))
