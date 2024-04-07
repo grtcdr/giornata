@@ -1,20 +1,23 @@
 Giornata is a foolishly simple journaling system for Emacs. It's hierarchical in
 nature and that's rooted in how the journal's files are organized.
 
-    ~/diary
-    └── 2024
-        ├── 01
-        │   ├── 01
-        │   ├── 02
-        │   ├── 03
-        │   ├── ..
-        │   ├── 30
-        │   └── 31
-        └── 02
-            ├── 01
-            ├── 02
-            ├── 03
-            └── and so on...
+```
+~/diary
+├── 2024     → directory
+│   ├── 01      → directory
+│   │   ├── 01     → file
+│   │   ├── 02
+│   │   ├── 03
+│   │   ├── …
+│   │   ├── 30
+│   │   └── 31
+│   └── 02
+│       ├── 01
+│       ├── 02
+│       ├── 03
+│       └── …
+└── …
+```
 
 The right-most digits are journal entries, their file extension is purposefully
 omitted because Giornata is not tied to any particular file format, you can
