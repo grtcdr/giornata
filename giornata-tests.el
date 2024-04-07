@@ -59,13 +59,6 @@ temporary directory.  `current-time' will be set to a fake time."
 	    (text-mode . "%A, %y-%m-%d\n"))))
      ,@body))
 
-(defun giornata-relative-entry (filename)
-  "Return FILENAME relative to `giornata-directory'."
-  (string-trim-left
-   (string-remove-prefix
-    (expand-file-name giornata-directory) filename)
-   "/"))
-
 
 ;;; Tests
 
