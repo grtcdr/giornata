@@ -5,8 +5,6 @@
 ;; Homepage: https://giornata.grtcdr.tn
 ;; Version: 2024.04.03
 
-(declare-function consult--grep "consult" (prompt make-builder dir initial))
-(declare-function consult--grep-make-builder "consult" (paths))
 (declare-function calendar-day-name "calendar" (date &optional abbrev absolute))
 
 (defgroup giornata nil
@@ -144,14 +142,6 @@ TIMESTAMP is a time value."
   "Create or visit today's entry in the diary."
   (interactive)
   (giornata--create-entry (current-time)))
-
-;;;###autoload
-(defun giornata-consult ()
-  "Search `giornata-directory' with `grep' via `consult' package."
-  (interactive)
-  (if (require 'consult nil :noerror)
-      (consult--grep "Search" #'consult--grep-make-builder giornata-directory nil)
-    (user-error "`consult' is not available.")))
 
 ;;;###autoload
 (defun giornata-scaffold ()
