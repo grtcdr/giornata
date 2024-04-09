@@ -11,10 +11,6 @@
 (require 'calendar)
 (require 'iso8601)
 
-(defconst giornata--entry-regexp
-  (rx string-start (= 2 digit) string-end)
-  "Return a regular expression matching a valid diary entry.")
-
 ;;;###autoload
 (defun giornata-from-calendar ()
   "Create an entry in the diary for the date at point."
@@ -30,28 +26,6 @@
     (void-variable
      (and (yes-or-no-p "See the calendar first?")
 	  (calendar)))))
-
-(defun giornata--directory-p (directory)
-  "Return non-nil if DIRECTORY is considered valid."
-  (let ((year-or-month (rx (or (= 4 digit) (= 2 digit)))))
-    (string-match-p year-or-month directory)))
-
-(defun giornata--entries (&optional year month)
-  "Return a list of diary entries.
-YEAR and MONTH can act as filters, returning only those entries
-underneath them."
-  (let ((fyear (and year (format "%04d" year)))
-	(fmonth (and month (format "%02d" month)))
-	(base-directory giornata-directory))
-    (if fyear
-	(setq base-directory
-	      (file-name-concat base-directory fyear)))
-    (if fmonth
-	(setq base-directory
-	      (file-name-concat base-directory fmonth)))
-    (directory-files-recursively
-     base-directory giornata--entry-regexp nil
-     #'giornata--directory-p)))
 
 (defun giornata--entries-as-dates (&optional year month)
   "Return diary entries as dates.
