@@ -65,9 +65,10 @@ A front matter, which as suggested by the name, is automatically inserted at the
 beginning of every journal entry, the contents of the front matter can be
 controlled through `giornata-front-matter`.
 
-If you'd like to use `giornata` on more than one device, you might be interested
-in customizing `giornata-dir-locals` and using `giornata-scaffold` to reproduce
-the same configuration across all your devices.
+If you'd like to use Giornata on more than one device, you might be interested
+in customizing the variable `giornata-dir-locals` and invoking the interactive
+function `giornata-scaffold` to reproduce the same configuration across all your
+devices.
 
 Remember that thing about reviewing your journal from the calendar? Giornata can
 highlight days with a corresponding journal entry if you let it:
