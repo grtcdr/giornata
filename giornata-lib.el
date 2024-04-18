@@ -21,26 +21,6 @@
 (defvar giornata-major-modes '(markdown org text)
   "List of supported major modes.")
 
-(defun giornata-front-matter-spec (time)
-  "Return a specification alist for `giornata-front-matter'.
-TIME is a list such as the one returned by `decode-time'."
-  (let ((day   (decoded-time-day time))
-	(month (decoded-time-month time))
-	(year  (decoded-time-year time)))
-    (list (cons ?A (calendar-day-name (list month day year)))
-	  (cons ?a (calendar-day-name (list month day year) t))
-	  (cons ?y (format "%04d" year))
-	  (cons ?m (format "%02d" month))
-	  (cons ?d (format "%02d" day)))))
-
-(defun giornata--format-front-matter (time)
-  "Return the formatted front matter.
-TIME is a list such as that returned by `decode-time'.
-Internally, this formats `giornata-front-matter' using
-`giornata-front-matter-spec'."
-  (format-spec giornata-front-matter
-	       (giornata-front-matter-spec time)))
-
 (defun giornata--buffer-empty-p ()
   "Return non-nil if buffer is empty."
   (= (point-min) (point-max)))
@@ -87,16 +67,35 @@ The function ensures that the former always ends in a slash."
    giornata--directory-regexp
    (car (last (file-name-split filename)))))
 
+(defun giornata-front-matter-spec (time)
+  "Return a specification alist for `giornata-front-matter'.
+TIME is a list like that which `decode-time' returns."
+  (let ((day   (decoded-time-day time))
+	(month (decoded-time-month time))
+	(year  (decoded-time-year time)))
+    (list (cons ?A (calendar-day-name (list month day year)))
+	  (cons ?a (calendar-day-name (list month day year) t))
+	  (cons ?y (format "%04d" year))
+	  (cons ?m (format "%02d" month))
+	  (cons ?d (format "%02d" day)))))
+
+(defun giornata--format-front-matter (time)
+  "Return the formatted front matter.
+TIME is a list such as that returned by `decode-time'.
+Internally, this formats `giornata-front-matter' using
+`giornata-front-matter-spec'."
+  (format-spec giornata-front-matter
+	       (giornata-front-matter-spec time)))
+
 (defun giornata--entries (&optional year month)
   "Return a list of diary entries.
 YEAR and MONTH can act as filters, returning only those entries
-underneath them."
+beneath them."
   (directory-files-recursively
      (cond (year (file-name-concat giornata-directory (format "%04d" year)))
 	   (month (file-name-concat giornata-directory (format "%02d" month)))
 	   (t giornata-directory))
-     giornata--entry-regexp nil
-     #'giornata--directory-p))
+     giornata--entry-regexp nil #'giornata--directory-p))
 
 (defun giornata--create-entry (timestamp)
   "Create or visit the entry corresponding to TIMESTAMP.
