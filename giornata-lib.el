@@ -7,6 +7,9 @@
 
 (declare-function calendar-day-name "calendar" (date &optional abbrev absolute))
 
+(defvar giornata-directory)
+(defvar giornata-front-matter)
+
 (defconst giornata--entry-regexp
   (rx string-start (= 2 digit) string-end)
   "Return a regular expression matching a valid entry in the diary.")
