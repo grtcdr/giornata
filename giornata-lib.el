@@ -88,14 +88,12 @@ The function ensures that the former always ends in a slash."
   "Return a list of diary entries.
 YEAR and MONTH can act as filters, returning only those entries
 underneath them."
-  (let ((year nil)
-	(month nil))
-    (directory-files-recursively
+  (directory-files-recursively
      (cond (year (file-name-concat giornata-directory (format "%04d" year)))
 	   (month (file-name-concat giornata-directory (format "%02d" month)))
 	   (t giornata-directory))
      giornata--entry-regexp nil
-     #'giornata--directory-p)))
+     #'giornata--directory-p))
 
 (defun giornata--create-entry (timestamp)
   "Create or visit the entry corresponding to TIMESTAMP.
