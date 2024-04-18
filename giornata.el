@@ -33,17 +33,20 @@ their associated value:
     %m, the month,
     %d, the day.
 
+Introducing a new format specifier should be accompanied by the
+addition of a new entry in `giornata-front-matter-spec'.
+
 What you set this variable to depends on the file format you
 choose to write in.
 
-If you're using `markdown-mode', you could use:
+For example, if you're using `markdown-mode', you could use:
 
     (setq giornata-front-matter
       (concat \"---\\n\"
 	      \"date: %A, %y-%m-%d\\n\"
 	      \"---\\n\\n\"))
 
-If you're using `org-mode', consider using this:
+And for those using `org-mode', consider this:
 
     (setq giornata-front-matter \"#+DATE: <%d-%m-%y %a>\\n\\n\")
 "
@@ -58,6 +61,9 @@ If you're using `org-mode', consider using this:
       (cursor-type . bar)
       (olivetti-body-width . 0.4))))
   "Generic directory local variables.
+
+Given that journal entries do not possess a file extension, the
+class should always be `fundamental-mode'.
 
 This variable determines the configuration that
 `giornata-scaffold' saves to the `dir-locals-file' relative to
