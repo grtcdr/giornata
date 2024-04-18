@@ -11,22 +11,6 @@
 (require 'calendar)
 (require 'iso8601)
 
-;;;###autoload
-(defun giornata-from-calendar ()
-  "Create an entry in the diary for the date at point."
-  (interactive)
-  (condition-case nil
-      (let* ((date  (calendar-cursor-to-date))
-	     (year  (nth 2 date))
-	     (month (nth 0 date))
-	     (day   (nth 1 date))
-	     (time  (encode-time (list 0 0 0 day month year))))
-	(calendar-exit t)
-	(giornata--create-entry time))
-    (void-variable
-     (and (yes-or-no-p "See the calendar first?")
-	  (calendar)))))
-
 (defun giornata--entries-as-dates (&optional year month)
   "Return diary entries as dates.
 YEAR and MONTH can act as filters, returning only those entries
@@ -55,9 +39,8 @@ DATE must be a valid ISO 8601 date."
 	(day   (nth 2 date)))
     (list month day year)))
 
-(defun giornata-highlight-entries (month year &optional _)
-  "Highlight entries of the specified MONTH and YEAR.
-INDENT is ignored."
+(defun giornata-highlight-entries (month year)
+  "Highlight entries of the specified MONTH and YEAR."
        (let ((entries
 	      ;; Needlessly convert the format of every entry from
 	      ;; YEAR-MONTH-DAY to MONTH-DAY-YEAR (as the calendar's internal
@@ -69,6 +52,22 @@ INDENT is ignored."
 			(giornata--entries-as-dates year month)))))
 	 (dolist (date entries)
 	   (calendar-mark-visible-date date))))
+
+;;;###autoload
+(defun giornata-from-calendar ()
+  "Create an entry in the diary for the date at point."
+  (interactive)
+  (condition-case nil
+      (let* ((date  (calendar-cursor-to-date))
+	     (year  (nth 2 date))
+	     (month (nth 0 date))
+	     (day   (nth 1 date))
+	     (time  (encode-time (list 0 0 0 day month year))))
+	(calendar-exit t)
+	(giornata--create-entry time))
+    (void-variable
+     (and (yes-or-no-p "See the calendar first?")
+	  (calendar)))))
 
 ;;;###autoload
 (define-minor-mode giornata-calendar-mode
