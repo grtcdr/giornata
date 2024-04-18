@@ -5,6 +5,8 @@
 ;; Homepage: https://giornata.grtcdr.tn
 ;; Version: 2024.04.03
 
+(declare-function calendar-day-name "calendar" (date &optional abbrev absolute))
+
 (defconst giornata--entry-regexp
   (rx string-start (= 2 digit) string-end)
   "Return a regular expression matching a valid entry in the diary.")
