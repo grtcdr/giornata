@@ -11,16 +11,9 @@
 (require 'calendar)
 (require 'iso8601)
 
-(defun giornata--entries-as-dates (&optional year month)
-  "Return diary entries as dates.
-YEAR and MONTH can act as filters, returning only those entries
-underneath them."
-  (mapcar
-   #'giornata--date-as-list
-   (mapcar
-    (lambda (filename)
-      (string-remove-prefix (concat giornata-directory "/") filename))
-    (funcall #'giornata--entries year month))))
+(defun giornata--relative-entry (filename)
+  "Return entry with FILENAME relative to `giornata-directory'."
+  (string-remove-prefix (concat giornata-directory "/") filename))
 
 (defun giornata--date-string-to-list (date)
   "Transform DATE string into a list.
@@ -31,6 +24,15 @@ DATE must be a valid ISO 8601 date."
 	      (month (decoded-time-month decoded-date))
 	      (day (decoded-time-day decoded-date)))
     (list year month day)))
+
+(defun giornata--entries-as-dates (&optional year month)
+  "Return diary entries as dates.
+YEAR and MONTH can act as filters, returning only those entries
+underneath them."
+  (thread-last
+    (funcall #'giornata--entries year month)
+    (mapcar #'giornata--relative-entry)
+    (mapcar #'giornata--date-string-to-list)))
 
 (defun giornata--mdy-to-ymd (date)
   "Convert a DATE from (MONTH DAY YEAR) to (YEAR MONTH DAY)."
