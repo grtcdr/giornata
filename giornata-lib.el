@@ -92,8 +92,15 @@ Internally, this formats `giornata-front-matter' using
 YEAR and MONTH can act as filters, returning only those entries
 beneath them."
   (directory-files-recursively
-     (cond (year (file-name-concat giornata-directory (format "%04d" year)))
-	   (month (file-name-concat giornata-directory (format "%02d" month)))
+     (cond ((and month year)
+	    (file-name-concat
+	     giornata-directory
+	     (format "%04d" year)
+	     (format "%02d" month)))
+	   (year
+	    (file-name-concat
+	     giornata-directory
+	     (format "%04d" year)))
 	   (t giornata-directory))
      giornata--entry-regexp nil #'giornata--directory-p))
 
