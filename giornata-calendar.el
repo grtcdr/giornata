@@ -39,19 +39,19 @@ DATE must be a valid ISO 8601 date."
 	(day   (nth 2 date)))
     (list month day year)))
 
-(defun giornata-highlight-entries (month year)
+(defun giornata--highlight-entries (month year &optional _)
   "Highlight entries of the specified MONTH and YEAR."
-       (let ((entries
-	      ;; Needlessly convert the format of every entry from
-	      ;; YEAR-MONTH-DAY to MONTH-DAY-YEAR (as the calendar's internal
-	      ;; library makes some terrible assumptions).
-	      (mapcar #'giornata--mdy-to-ymd
-		      ;; A month may be displayed for which no entries have yet
-		      ;; been made.
-		      (ignore-error 'file-missing
-			(giornata--entries-as-dates year month)))))
-	 (dolist (date entries)
-	   (calendar-mark-visible-date date))))
+  (let ((entries
+	 ;; Needlessly convert the format of every entry from
+	 ;; YEAR-MONTH-DAY to MONTH-DAY-YEAR (as the calendar's internal
+	 ;; library makes some terrible assumptions).
+	 (mapcar #'giornata--mdy-to-ymd
+		 ;; A month may be displayed for which no entries have yet
+		 ;; been made.
+		 (ignore-error 'file-missing
+		   (giornata--entries-as-dates year month)))))
+    (dolist (date entries)
+      (calendar-mark-visible-date date))))
 
 ;;;###autoload
 (defun giornata-from-calendar ()
@@ -76,7 +76,7 @@ DATE must be a valid ISO 8601 date."
   :require 'calendar
   :version "0.1.0"
   (if giornata-calendar-mode
-      (advice-add 'calendar-generate-month :after #'giornata-highlight-entries)
-    (advice-remove 'calendar-generate-month #'giornata-highlight-entries)))
+      (advice-add 'calendar-generate-month :after #'giornata--highlight-entries)
+    (advice-remove 'calendar-generate-month #'giornata--highlight-entries)))
 
 (provide 'giornata-calendar)
