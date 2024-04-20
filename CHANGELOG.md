@@ -1,3 +1,14 @@
+# 2024.04.20
+
+- Improve the documentation
+- Write a test suite spanning most of the code base
+- Put a pipeline into place to catch test errors
+- Mark private functions which were previously public
+- Switch to advice-add to advise calendar-generate-month
+- Set the type property of the customizable variable `giornata-dir-locals` to
+  from `list` to the more correct `alist`
+- Remove the interactive function `giornata-consult`
+
 # 2024.04.03
 
 - Make the major mode a customizable option
