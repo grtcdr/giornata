@@ -4,4 +4,4 @@ sources:
 tasks:
   - test: |
       cd giornata
-      guix shell --pure --container --manifest=test-shell.scm -- make test
+      guix shell --pure --container --manifest=tests.scm -- make test
