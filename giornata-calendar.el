@@ -22,7 +22,7 @@ underneath them."
       (string-remove-prefix (concat giornata-directory "/") filename))
     (funcall #'giornata--entries year month))))
 
-(defun giornata--date-as-list (date)
+(defun giornata--date-string-to-list (date)
   "Transform DATE string into a list.
 DATE must be a valid ISO 8601 date."
   (when-let* ((date (string-replace "/" "-" date))

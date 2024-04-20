@@ -130,10 +130,10 @@ temporary directory."
      (call-interactively #'giornata-scaffold))
    (should (equal (giornata--default-major-mode) 'markdown-mode))))
 
-(ert-deftest giornata--date-as-list ()
+(ert-deftest giornata--date-string-to-list ()
   "Check that `giornata--date-as-list' works as expected."
-  (should (equal (giornata--date-as-list "1985/03/20")
+  (should (equal (giornata--date-string-to-list "1985/03/20")
 		 (list 1985 03 20)))
   ;; `giornata--date-as-list' only works with ISO 8601 dates.
-  (should-error (giornata--date-as-list "01/01/2000")
+  (should-error (giornata--date-string-to-list "01/01/2000")
 		:type 'wrong-type-argument))
