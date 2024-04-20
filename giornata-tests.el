@@ -5,7 +5,7 @@
 ;; Author: Taha Aziz Ben Ali <ba.tahaaziz@gmail.com>
 ;; Maintainer: Taha Aziz Ben Ali <ba.tahaaziz@gmail.com>
 ;; License: ISC - See LICENSE for legalese
-;; Version: 2024.04.03
+;; Version: 2024.04.20
 
 ;; This test suite includes both unit and integration tests, the latter must be
 ;; frozen in time so faketime(1) is a hard requirement for most tests to

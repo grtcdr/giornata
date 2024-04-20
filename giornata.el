@@ -3,7 +3,7 @@
 ;; Copyright (C) 2023 Taha Aziz Ben Ali <ba.tahaaziz@gmail.com>
 ;; License: ISC - See LICENSE for legalese
 ;; Homepage: https://giornata.grtcdr.tn
-;; Version: 2024.04.03
+;; Version: 2024.04.20
 
 (require 'giornata-lib)
 

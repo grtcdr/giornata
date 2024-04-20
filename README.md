@@ -54,7 +54,7 @@ Giornata is not yet available in any package archive so you'll have to obtain it
 from source by evaluating the following:
 
 ``` emacs-lisp
-(package-vc-install "https://git.sr.ht/~grtcdr/giornata" "2024.04.03")
+(package-vc-install "https://git.sr.ht/~grtcdr/giornata" "2024.04.20")
 ```
 
 # Configuration
