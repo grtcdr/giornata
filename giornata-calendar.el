@@ -47,7 +47,7 @@ underneath them."
 	 ;; Needlessly convert the format of every entry from
 	 ;; YEAR-MONTH-DAY to MONTH-DAY-YEAR (as the calendar's internal
 	 ;; library makes some terrible assumptions).
-	 (mapcar #'giornata--mdy-to-ymd
+	 (mapcar #'giornata--ymd-to-mdy
 		 ;; A month may be displayed for which no entries have yet
 		 ;; been made.
 		 (ignore-error 'file-missing
