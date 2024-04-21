@@ -11,7 +11,7 @@
 (require 'calendar)
 (require 'iso8601)
 
-(defun giornata--relative-entry (filename)
+(defun giornata--date-from-filename (filename)
   "Return entry with FILENAME relative to `giornata-directory'."
   (string-remove-prefix (concat giornata-directory "/") filename))
 
@@ -31,10 +31,10 @@ YEAR and MONTH can act as filters, returning only those entries
 underneath them."
   (thread-last
     (funcall #'giornata--entries year month)
-    (mapcar #'giornata--relative-entry)
+    (mapcar #'giornata--date-from-filename)
     (mapcar #'giornata--date-string-to-list)))
 
-(defun giornata--mdy-to-ymd (date)
+(defun giornata--ymd-to-mdy (date)
   "Convert a DATE from (MONTH DAY YEAR) to (YEAR MONTH DAY)."
   (let ((year  (nth 0 date))
 	(month (nth 1 date))
