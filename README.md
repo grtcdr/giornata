@@ -19,10 +19,9 @@ nature and that's rooted in how the journal's files are organized.
 └── …
 ```
 
-The right-most digits are journal entries, their file extension is purposefully
-omitted because Giornata is not tied to any particular file format, you can
-choose whatever you feel most comfortable with. The year and month are just
-directories.
+The right-most digits are your journal entries, their file extension is
+purposefully omitted because Giornata is not tied to any particular file format,
+you can choose whatever you feel most comfortable with.
 
 Giornata is responsible for creating these files and directories so you can
 focus on writing.
