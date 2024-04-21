@@ -56,7 +56,6 @@ And for those using `org-mode', consider this:
   '((fundamental-mode
      ((mode . text)
       (mode . auto-fill)
-      (mode . olivetti)
       (mode . buffer-face)
       (cursor-type . bar)
       (olivetti-body-width . 0.4))))
