@@ -137,3 +137,15 @@ temporary directory."
   ;; `giornata--date-as-list' only works with ISO 8601 dates.
   (should-error (giornata--date-string-to-list "01/01/2000")
 		:type 'wrong-type-argument))
+
+(ert-deftest giornata--date-from-filename ()
+  "Check that `giornata--date-from-filename' works as expected."
+  (let ((filename (file-name-concat giornata-directory "1900/01/01")))
+    (should (string-equal "1900/01/01"
+			  (giornata--date-from-filename filename)))))
+
+(ert-deftest giornata--ymd-to-mdy ()
+  "Check that `giornata--ymd-to-mdy' works as expected."
+  (let* ((ymd (list 1900 12 28)))
+    (should (equal (list 12 28 1900)
+		   (giornata--ymd-to-mdy ymd) ))))
