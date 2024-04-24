@@ -19,10 +19,7 @@
 ;;; Helpers
 
 (defmacro with-temporary-giornata-directory (&rest body)
-  "Evaluate BODY deterministically.
-
-BODY will be evaluated with `giornata-directory' bound to a
-temporary directory."
+  "Evaluate BODY with a temporary `giornata-directory'."
   (declare (indent nil))
   `(let ((giornata-directory (make-temp-file "giornata-" :directory)))
      (prog1 (progn ,@body)
@@ -42,30 +39,28 @@ temporary directory."
 	(giornata-from-calendar)
 	(save-buffer)))))
 
-(defun giornata-relative-entry (filename)
-  "Return FILENAME relative to `giornata-directory'."
-  (string-trim-left
-   (string-remove-prefix
-    (expand-file-name giornata-directory) filename)
-   "/"))
-
 
 ;;; Tests
 
-(ert-deftest giornata--buffer-empty-p ()
-  "Check that `giornata--buffer-empty-p' works as expected."
-  (with-temp-buffer
-    (should (equal (giornata--buffer-empty-p) t)))
-  (with-temp-buffer
-    (insert "foo")
-    (should (not (giornata--buffer-empty-p)))))
+(ert-deftest giornata--date-string-to-list ()
+  "Check that `giornata--date-as-list' works as expected."
+  (should (equal (giornata--date-string-to-list "1985/03/20")
+		 (list 1985 03 20)))
+  ;; `giornata--date-as-list' only works with ISO 8601 dates.
+  (should-error (giornata--date-string-to-list "01/01/2000")
+		:type 'wrong-type-argument))
 
-(ert-deftest giornata-from-calendar ()
-  "Check that `giornata-from-calendar' works as expected."
-  (with-temporary-giornata-directory
-   (giornata-create-entries 7 'forward)
-   (giornata-create-entries 7 'backward)
-   (should (= (length (giornata--entries)) 14))))
+(ert-deftest giornata--date-from-filename ()
+  "Check that `giornata--date-from-filename' works as expected."
+  (let ((filename (file-name-concat giornata-directory "1900/01/01")))
+    (should (string-equal "1900/01/01"
+			  (giornata--date-from-filename filename)))))
+
+(ert-deftest giornata--ymd-to-mdy ()
+  "Check that `giornata--ymd-to-mdy' works as expected."
+  (let* ((ymd (list 1900 12 28)))
+    (should (equal (list 12 28 1900)
+		   (giornata--ymd-to-mdy ymd) ))))
 
 (ert-deftest giornata--directory-p ()
   "Check that `giornata--directory-p' works as expected."
@@ -74,6 +69,13 @@ temporary directory."
   (should (= (giornata--directory-p "20") 0))
   ;; Year-matching
   (should (= (giornata--directory-p "2024") 0)))
+
+(ert-deftest giornata-from-calendar ()
+  "Check that `giornata-from-calendar' works as expected."
+  (with-temporary-giornata-directory
+   (giornata-create-entries 7 'forward)
+   (giornata-create-entries 7 'backward)
+   (should (= (length (giornata--entries)) 14))))
 
 (ert-deftest giornata--format-front-matter ()
   "Check that `giornata--format-front-matter' works as expected."
@@ -84,13 +86,21 @@ temporary directory."
       (giornata--format-front-matter time)
       "Monday (Mon), 2024-01-01"))))
 
+(ert-deftest giornata--buffer-empty-p ()
+  "Check that `giornata--buffer-empty-p' works as expected."
+  (with-temp-buffer
+    (should (equal (giornata--buffer-empty-p) t)))
+  (with-temp-buffer
+    (insert "foo")
+    (should (not (giornata--buffer-empty-p)))))
+
 (ert-deftest giornata-today ()
   "Check that `giornata-today' works as expected."
   (with-temporary-giornata-directory
    (call-interactively #'giornata-today)
    (call-interactively #'save-buffer)
    (let* ((entries (giornata--entries))
-	  (first (giornata-relative-entry (car entries))))
+	  (first (giornata--date-from-filename (car entries))))
      (should (equal (length entries) 1))
      (should (string-equal first "2024/01/01")))))
 
@@ -129,23 +139,3 @@ temporary directory."
 	  '((fundamental-mode . ((mode . markdown))))))
      (call-interactively #'giornata-scaffold))
    (should (equal (giornata--default-major-mode) 'markdown-mode))))
-
-(ert-deftest giornata--date-string-to-list ()
-  "Check that `giornata--date-as-list' works as expected."
-  (should (equal (giornata--date-string-to-list "1985/03/20")
-		 (list 1985 03 20)))
-  ;; `giornata--date-as-list' only works with ISO 8601 dates.
-  (should-error (giornata--date-string-to-list "01/01/2000")
-		:type 'wrong-type-argument))
-
-(ert-deftest giornata--date-from-filename ()
-  "Check that `giornata--date-from-filename' works as expected."
-  (let ((filename (file-name-concat giornata-directory "1900/01/01")))
-    (should (string-equal "1900/01/01"
-			  (giornata--date-from-filename filename)))))
-
-(ert-deftest giornata--ymd-to-mdy ()
-  "Check that `giornata--ymd-to-mdy' works as expected."
-  (let* ((ymd (list 1900 12 28)))
-    (should (equal (list 12 28 1900)
-		   (giornata--ymd-to-mdy ymd) ))))
