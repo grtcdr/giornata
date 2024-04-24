@@ -13,7 +13,11 @@
 
 (defun giornata--date-from-filename (filename)
   "Return entry with FILENAME relative to `giornata-directory'."
-  (string-remove-prefix (concat giornata-directory "/") filename))
+  (string-trim-left
+   (string-remove-prefix
+    (expand-file-name giornata-directory)
+    (expand-file-name filename))
+   "/"))
 
 (defun giornata--date-string-to-list (date)
   "Transform DATE string into a list.
