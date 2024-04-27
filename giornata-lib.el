@@ -5,7 +5,7 @@
 ;; Homepage: https://giornata.grtcdr.tn
 ;; Version: 2024.04.20
 
-(declare-function calendar-day-name "calendar" (date &optional abbrev absolute))
+(require 'calendar)
 
 (defvar giornata-directory)
 (defvar giornata-front-matter)
