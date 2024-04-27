@@ -72,8 +72,7 @@ And for those using `org-mode', consider this:
      ((mode . text)
       (mode . auto-fill)
       (mode . buffer-face)
-      (cursor-type . bar)
-      (olivetti-body-width . 0.4))))
+      (cursor-type . bar))))
   "Generic directory local variables.
 
 Given that journal entries do not possess a file extension, the
