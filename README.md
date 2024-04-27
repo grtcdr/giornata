@@ -32,7 +32,7 @@ Let's go over the foundations of this system:
 1. Writing something in the journal should be very quick; you shouldn't have to
    think about it.
 2. Reviewing the journal should be intuitive; your calendar is the perfect tool
-   for that.
+   for that (for more information, see the "Customization" section).
 
 Writing something with Giornata can be done in one of two ways: the first
 method, the one you'll be using most often, is to call `giornata-today`, an
@@ -56,7 +56,11 @@ from source by evaluating the following:
 (package-vc-install "https://git.sr.ht/~grtcdr/giornata" "2024.04.20")
 ```
 
-# Configuration
+Start journaling right away by typing `M-x giornata-today RET` or read through
+the next section to get an idea of the different customization options at your
+disposal.
+
+# Customization
 
 Your journal is located in `giornata-directory`.
 
@@ -65,9 +69,10 @@ beginning of every journal entry, the contents of the front matter can be
 controlled through `giornata-front-matter`.
 
 Customization is mostly delegated to directory local variables for which an
-interactive scaffolding function, `giornata-scaffold`, exists to help reproduce
-the same configuration across different machines via the `giornata-dir-locals`
-variable.
+interactive scaffolding function, `giornata-scaffold`, exists *not only* as a
+good starting point for users new to Giornata but also to make it more
+convenient to reproduce the same "look and feel" that across different machines
+via the `giornata-dir-locals` variable.
 
 Remember that thing about reviewing your journal from the calendar? Giornata can
 highlight days with a corresponding journal entry if you let it:
