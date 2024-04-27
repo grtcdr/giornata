@@ -65,7 +65,8 @@ And for those using `org-mode', consider this:
 
     (setq giornata-front-matter \"#+DATE: <%d-%m-%y %a>\\n\\n\")
 "
-  :type 'string)
+  :type 'string
+  :group 'giornata)
 
 (defcustom giornata-dir-locals
   '((fundamental-mode
@@ -75,14 +76,15 @@ And for those using `org-mode', consider this:
       (cursor-type . bar))))
   "Generic directory local variables.
 
-Given that journal entries do not possess a file extension, the
-class should always be `fundamental-mode'.
-
 This variable determines the configuration that
 `giornata-scaffold' saves to the `dir-locals-file' relative to
-the `giornata-directory'."
+the `giornata-directory'.
+
+Given that journal entries do not possess a file extension, they
+should be configured as if their mode were `fundamental-mode'."
   :type '(alist)
-  :link '(info-link "(emacs)Directory Variables"))
+  :link '(info-link "(emacs)Directory Variables")
+  :group 'giornata)
 
 ;;;###autoload
 (defun giornata-today ()
