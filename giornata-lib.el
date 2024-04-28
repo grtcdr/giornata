@@ -18,7 +18,7 @@
   (rx string-start (or (= 4 digit) (= 2 digit)) string-end)
   "Return a regular expression matching a valid directory in the diary.")
 
-(defvar giornata-major-modes '(markdown org text)
+(defvar giornata-major-modes '(markdown org text rst)
   "List of supported major modes.")
 
 (defun giornata--buffer-empty-p ()
