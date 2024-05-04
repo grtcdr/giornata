@@ -68,7 +68,7 @@ A front matter, which as suggested by the name, is automatically inserted at the
 beginning of every journal entry, the contents of the front matter can be
 controlled through `giornata-front-matter`.
 
-Customization is mostly delegated to directory local variables for which an
+Configuration is mostly delegated to directory local variables for which an
 interactive scaffolding function, `giornata-scaffold`, exists *not only* as a
 good starting point for users new to Giornata but also to make it more
 convenient to reproduce the same "look and feel" that across different machines
@@ -80,6 +80,9 @@ highlight days with a corresponding journal entry if you let it:
 ```
 (add-hook 'calendar-mode-hook #'giornata-calendar-mode)
 ```
+
+If you prefer the menu bar, enabling the variable `giornata-menu-item` will add
+an entry named "Giornata" under the "Tools" menu.
 
 # Support
 
