@@ -30,7 +30,7 @@ DATE must be a valid ISO 8601 date."
     (list year month day)))
 
 (defun giornata--entries-as-dates (&optional year month)
-  "Return diary entries as dates.
+  "Return journal entries as dates.
 YEAR and MONTH can act as filters, returning only those entries
 underneath them."
   (thread-last
@@ -60,7 +60,7 @@ underneath them."
 
 ;;;###autoload
 (defun giornata-from-calendar ()
-  "Create an entry in the diary for the date at point."
+  "Create an entry in the journal for the date at point."
   (interactive)
   (condition-case nil
       (let* ((date  (calendar-cursor-to-date))

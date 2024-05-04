@@ -12,11 +12,11 @@
 
 (defconst giornata--entry-regexp
   (rx string-start (= 2 digit) string-end)
-  "Return a regular expression matching a valid entry in the diary.")
+  "Return a regular expression matching a valid entry in the journal.")
 
 (defconst giornata--directory-regexp
   (rx string-start (or (= 4 digit) (= 2 digit)) string-end)
-  "Return a regular expression matching a valid directory in the diary.")
+  "Return a regular expression matching a valid directory in the journal.")
 
 (defvar giornata-major-modes '(markdown org text rst)
   "List of supported major modes.")
@@ -88,7 +88,7 @@ Internally, this formats `giornata-front-matter' using
 	       (giornata-front-matter-spec time)))
 
 (defun giornata--entries (&optional year month)
-  "Return a list of diary entries.
+  "Return a list of journal entries.
 YEAR and MONTH can act as filters, returning only those entries
 beneath them."
   (directory-files-recursively

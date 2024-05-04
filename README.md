@@ -2,7 +2,7 @@ Giornata is a foolishly simple journaling system for Emacs. It's hierarchical in
 nature and that's rooted in how the journal's files are organized.
 
 ```
-~/diary
+~/journal
 ├── 2024     → directory
 │   ├── 01      → directory
 │   │   ├── 01     → file

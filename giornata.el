@@ -12,8 +12,8 @@
   :prefix "giornata-"
   :group 'convenience)
 
-(defcustom giornata-directory "~/diary"
-  "Directory containing your diary."
+(defcustom giornata-directory "~/journal"
+  "Directory containing your journal."
   :type 'directory
   :group 'giornata)
 
@@ -88,7 +88,7 @@ should be configured as if their mode were `fundamental-mode'."
 
 ;;;###autoload
 (defun giornata-today ()
-  "Create or visit today's entry in the diary."
+  "Create or visit today's entry in the journal."
   (interactive)
   (giornata--create-entry (current-time)))
 
