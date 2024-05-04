@@ -17,21 +17,6 @@
   :type 'directory
   :group 'giornata)
 
-(defcustom giornata-menu-item nil
-  "Add an item for `giornata-today' to the menu bar.
-If non-nil, an item named \"Giornata\" will appear under the
-\"Tools\" menu."
-  :type 'boolean
-  :group 'giornata
-  :set
-  #'(lambda (symbol value)
-      (set-default symbol value)
-      (if value
-	  (define-key-after global-map [menu-bar tools giornata]
-	    (cons "Giornata" 'giornata-today)
-	    'calendar)
-	(define-key global-map [menu-bar tools giornata] nil t))))
-
 (defcustom giornata-front-matter
   "* %A, %d-%m-%y\n\n"
   "String to be inserted at the top of a newly opened journal entry.
@@ -85,6 +70,21 @@ should be configured as if their mode were `fundamental-mode'."
   :type '(alist)
   :link '(info-link "(emacs)Directory Variables")
   :group 'giornata)
+
+(defcustom giornata-menu-item nil
+  "Add an item for `giornata-today' to the menu bar.
+If non-nil, an item named \"Giornata\" will appear under the
+\"Tools\" menu."
+  :type 'boolean
+  :group 'giornata
+  :set
+  #'(lambda (symbol value)
+      (set-default symbol value)
+      (if value
+	  (define-key-after global-map [menu-bar tools giornata]
+	    (cons "Giornata" 'giornata-today)
+	    'calendar)
+	(define-key global-map [menu-bar tools giornata] nil t))))
 
 ;;;###autoload
 (defun giornata-today ()
