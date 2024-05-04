@@ -139,3 +139,8 @@
 	  '((fundamental-mode . ((mode . markdown))))))
      (call-interactively #'giornata-scaffold))
    (should (equal (giornata--default-major-mode) 'markdown-mode))))
+
+(ert-deftest giornata--normalize-directory ()
+  "Check that `giornata--normalize-directory' works as expected."
+  (let ((giornata-directory "/home/foo/journal"))
+    (should (equal (giornata--normalize-directory) "/home/foo/journal/"))))
