@@ -7,7 +7,7 @@
 
 (require 'giornata-lib)
 
-(defgroup giornata nil
+(defgroup giornata ()
   "Foolishly simple journaling."
   :prefix "giornata-"
   :group 'convenience)
