@@ -1,3 +1,11 @@
+# 2024.05.05
+
+- Add support for reStructuredText aka rst-mode
+- Add customizable option for showing a menu item
+- Make giornata--date-from-filename more robust
+- Remove references to olivetti from giornata-dir-locals as it may cause issues
+  for users who do not have it installed
+
 # 2024.04.20
 
 - Improve the documentation

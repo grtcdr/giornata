@@ -53,7 +53,7 @@ Giornata is not yet available in any package archive so you'll have to obtain it
 from source by evaluating the following:
 
 ``` emacs-lisp
-(package-vc-install "https://git.sr.ht/~grtcdr/giornata" "2024.04.20")
+(package-vc-install "https://git.sr.ht/~grtcdr/giornata" "2024.05.05")
 ```
 
 Start journaling right away by typing `M-x giornata-today RET` or read through

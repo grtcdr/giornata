@@ -5,7 +5,7 @@
 ;; Author: Taha Aziz Ben Ali <ba.tahaaziz@gmail.com>
 ;; Maintainer: Taha Aziz Ben Ali <ba.tahaaziz@gmail.com>
 ;; License: ISC - See LICENSE for legalese
-;; Version: 2024.04.20
+;; Version: 2024.05.05
 
 (require 'giornata)
 (require 'calendar)
