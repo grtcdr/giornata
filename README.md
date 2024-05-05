@@ -81,8 +81,8 @@ highlight days with a corresponding journal entry if you let it:
 (add-hook 'calendar-mode-hook #'giornata-calendar-mode)
 ```
 
-If you prefer the menu bar, enabling the variable `giornata-menu-item` will add
-an entry named "Giornata" under the "Tools" menu.
+If you prefer to access your journal through the menu bar, enabling the variable
+`giornata-menu-item` will add an entry named "Giornata" under the "Tools" menu.
 
 # Support
 
