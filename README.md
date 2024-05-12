@@ -82,7 +82,8 @@ highlight days with a corresponding journal entry if you let it:
 ```
 
 If you prefer to access your journal through the menu bar, enabling the variable
-`giornata-menu-item` will add an entry named "Giornata" under the "Tools" menu.
+`giornata-menu-item` will add an entry named "Giornata" under the "Tools" menu
+that you can use to jump to your journal.
 
 # Support
 
