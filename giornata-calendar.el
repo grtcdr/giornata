@@ -12,7 +12,8 @@
 (require 'iso8601)
 
 (defun giornata--date-from-filename (filename)
-  "Return entry with FILENAME relative to `giornata-directory'."
+  "Return the date component of FILENAME.
+FILENAME is an absolute filename representing a journal entry."
   (string-trim-left
    (string-remove-prefix
     (expand-file-name giornata-directory)
