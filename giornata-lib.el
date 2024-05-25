@@ -114,7 +114,9 @@ TIMESTAMP is a time value."
 	 (directory (expand-file-name (format "%04d/%02d" year month) giornata-directory))
 	 (filename  (expand-file-name (format "%02d" day) directory)))
     (make-directory directory :parents)
-    (find-file filename)
+    (pop-to-buffer (find-file-noselect filename)
+		   '(display-buffer-reuse-mode-window
+		     display-buffer-reuse-window))
     (unless (eq major-mode (giornata--default-major-mode))
       (funcall major-mode))
     (when (giornata--buffer-empty-p)
