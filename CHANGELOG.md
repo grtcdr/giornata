@@ -1,3 +1,10 @@
+# 2024.05.25
+
+- `giornata--create-entry` now uses `pop-to-buffer` providing users the freedom
+  to customize how the buffer is displayed
+- Add a variable named `giornata-hide-calendar` that controls whether the
+  calendar is closed after invoking `giornata-from-calendar`
+
 # 2024.05.05
 
 - Add support for reStructuredText aka rst-mode
