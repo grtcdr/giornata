@@ -45,7 +45,7 @@ underneath them."
     (mapcar #'giornata--date-string-to-list)))
 
 (defun giornata--ymd-to-mdy (date)
-  "Convert a DATE from (MONTH DAY YEAR) to (YEAR MONTH DAY)."
+  "Convert a DATE from (YEAR MONTH DAY) to (MONTH DAY YEAR)."
   (let ((year  (nth 0 date))
 	(month (nth 1 date))
 	(day   (nth 2 date)))
