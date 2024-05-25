@@ -11,6 +11,11 @@
 (require 'calendar)
 (require 'iso8601)
 
+(defcustom giornata-hide-calendar t
+  "Hide the calendar after visiting a journal entry."
+  :type 'boolean
+  :group 'giornata)
+
 (defun giornata--date-from-filename (filename)
   "Return the date component of FILENAME.
 FILENAME is an absolute filename representing a journal entry."
@@ -69,7 +74,8 @@ underneath them."
 	     (month (nth 0 date))
 	     (day   (nth 1 date))
 	     (time  (encode-time (list 0 0 0 day month year))))
-	(calendar-exit t)
+	(when giornata-hide-calendar
+	  (calendar-exit))
 	(giornata--create-entry time))
     (void-variable
      (when (yes-or-no-p "See the calendar first?")
