@@ -72,8 +72,8 @@ underneath them."
 	(calendar-exit t)
 	(giornata--create-entry time))
     (void-variable
-     (and (yes-or-no-p "See the calendar first?")
-	  (calendar)))))
+     (when (yes-or-no-p "See the calendar first?")
+       (calendar)))))
 
 ;;;###autoload
 (define-minor-mode giornata-calendar-mode
