@@ -28,11 +28,12 @@ FILENAME is an absolute filename representing a journal entry."
 (defun giornata--date-string-to-list (date)
   "Transform DATE string into a list.
 DATE must be a valid ISO 8601 date."
-  (when-let* ((date (string-replace "/" "-" date))
-	      (decoded-date (iso8601-parse-date date))
-	      (year (decoded-time-year decoded-date))
-	      (month (decoded-time-month decoded-date))
-	      (day (decoded-time-day decoded-date)))
+  (when-let*
+      ((date (string-replace "/" "-" date))
+       (decoded-date (iso8601-parse-date date))
+       (year (decoded-time-year decoded-date))
+       (month (decoded-time-month decoded-date))
+       (day (decoded-time-day decoded-date)))
     (list year month day)))
 
 (defun giornata--entries-as-dates (&optional year month)
