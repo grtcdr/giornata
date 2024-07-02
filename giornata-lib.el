@@ -115,7 +115,8 @@ TIMESTAMP is a time value."
 	 (filename  (expand-file-name (format "%02d" day) directory)))
     (make-directory directory :parents)
     (pop-to-buffer (find-file-noselect filename)
-		   '(display-buffer-reuse-mode-window
+		   '(display-buffer-same-window
+		     display-buffer-reuse-mode-window
 		     display-buffer-reuse-window))
     (unless (eq major-mode (giornata--default-major-mode))
       (funcall major-mode))
