@@ -85,6 +85,13 @@ If you prefer to access your journal through the menu bar, enabling the variable
 `giornata-menu-item` will add an entry named "Giornata" under the "Tools" menu
 that you can use to jump to your journal.
 
+# Contributing
+
+Giornata is considered feature-complete, you can rely on the package not
+to suddenly change. I originally built this package with the intent to
+keep it generic and unopinionated. I will not accept patches that
+incorporate new features.
+
 # Support
 
 If you wish to contribute a patch, inquire about something or share your
