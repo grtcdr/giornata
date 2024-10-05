@@ -19,7 +19,7 @@
 
 (defcustom giornata-front-matter
   "* %A, %d-%m-%y\n\n"
-  "String to be inserted at the top of a newly opened journal entry.
+  "String to be inserted at the top of a newly created journal entry.
 
 This variable is processed by `giornata-front-matter-spec' to
 produce the final front matter.
