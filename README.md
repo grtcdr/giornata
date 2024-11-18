@@ -94,13 +94,9 @@ incorporate new features.
 
 # Support
 
-If you wish to contribute a patch, inquire about something or share your
-feedback, you are welcome to send an email to
-[~grtcdr/pub@lists.sr.ht][mailing-list]. If you encounter issues of any kind,
-please file them in the project's [ticket tracker][ticket-tracker].
+If you wish to contribute a patch, inquire about something or share your feedback, you are welcome to send an email to [~grtcdr/pub@lists.sr.ht](mailto:~grtcdr/pub@lists.sr.ht). If this is your first time collaborating over email, please check out [this guide](https://git-send-email.io/). If you encounter issues of any kind, please file them in the project's [ticket tracker](https://todo.sr.ht/~grtcdr/giornata).
 
 ![builds.sr.ht status](https://builds.sr.ht/~grtcdr/giornata/commits.svg)
 
 [mailing-list]: mailto:~grtcdr/pub@lists.sr.ht
-[ticket-tracker]: https://todo.sr.ht/~grtcdr/giornata
 [calendar-preview]: media/calendar.webp
